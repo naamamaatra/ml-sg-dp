@@ -234,9 +234,6 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 <span class="text-xl">🔒</span>
 <span class="font-bold text-white text-base tracking-tight font-sans">DP-ML</span>
 </div>
-<span class="font-mono text-[11px] font-semibold text-[#f093fb] bg-white/[0.08] px-2 py-0.5 rounded border border-white/[0.1]">
-          v2.4
-        </span>
 </div>
 <!-- Separator Line -->
 <div class="h-[1px] w-full bg-white/[0.07]"></div>
