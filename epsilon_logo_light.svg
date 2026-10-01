@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="epsBgLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2f1fe"/>
+      <stop offset="50%" stop-color="#ebe8fb"/>
+      <stop offset="100%" stop-color="#e3def8"/>
+    </linearGradient>
+    <filter id="dotGlowLight" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="0.8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Light pastel lavender squircle container -->
+  <rect width="100" height="100" rx="24" fill="url(#epsBgLight)" stroke="rgba(99, 102, 241, 0.28)" stroke-width="1.2"/>
+  
+  <!-- Stylized Greek Epsilon glyph in vibrant royal violet -->
+  <path d="M 68 28.5 C 44 26.5 28 35 28 47.5 C 28 53.5 39 51.5 48 50 C 39 50.5 28 55 28 66 C 28 78 44 83.5 68 73.5" 
+        fill="none" 
+        stroke="#6366f1" 
+        stroke-width="7.5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+        
+  <!-- 3 Calibrated Golden DP Perturbation Particles -->
+  <circle cx="58" cy="43.5" r="4.0" fill="#f59e0b" filter="url(#dotGlowLight)"/>
+  <circle cx="69" cy="52.5" r="3.0" fill="#fbbf24" filter="url(#dotGlowLight)"/>
+  <circle cx="61" cy="62.5" r="2.4" fill="#d97706" filter="url(#dotGlowLight)"/>
+</svg>

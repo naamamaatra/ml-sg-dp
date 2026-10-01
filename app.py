@@ -33,8 +33,8 @@ from dashboard_ui   import render_dashboard_component
 # ─── Page Configuration ────────────────────────────────────────────────────
 # ---------------------------------------------------------------------------
 st.set_page_config(
-    page_title      = "DP-ML Privacy Demo",
-    page_icon       = "🔐",
+    page_title      = "Epsilon — Differential Privacy Studio",
+    page_icon       = "ε",
     layout          = "wide",
     initial_sidebar_state = "collapsed",
 )

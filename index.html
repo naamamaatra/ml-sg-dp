@@ -3,7 +3,15 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Privacy-Preserving ML Demo</title>
+<script>
+  try {
+    if (localStorage.getItem('epsilon_theme') === 'light') {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch(e) {}
+</script>
+<title>Epsilon — Differential Privacy Studio</title>
+<link rel="icon" type="image/svg+xml" href="epsilon_logo.svg"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
@@ -192,6 +200,974 @@
       transition: all 0.4s ease-in-out;
     }
 
+    /* ========================================================================= */
+    /* BRIGHT MODE / LIGHT THEME SYSTEM                                         */
+    /* ========================================================================= */
+    html:not(.dark) {
+      color-scheme: light;
+    }
+
+    html:not(.dark) body {
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+    }
+
+    html:not(.dark) ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    html:not(.dark) ::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.25);
+      border-radius: 3px;
+    }
+    html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 116, 139, 0.4);
+    }
+
+    /* Sidebar in bright mode */
+    html:not(.dark) aside {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+      border-right-color: #e2e8f0 !important;
+      box-shadow: 2px 0 16px -4px rgba(15, 23, 42, 0.06);
+    }
+
+    html:not(.dark) .sidebar-section-title {
+      color: #475569 !important;
+    }
+
+    html:not(.dark) aside .bg-black\/40 {
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    html:not(.dark) aside #btn-src-builtin.text-brandMuted,
+    html:not(.dark) aside #btn-src-upload.text-brandMuted {
+      color: #64748b !important;
+    }
+    html:not(.dark) aside #btn-src-builtin.text-brandMuted:hover,
+    html:not(.dark) aside #btn-src-upload.text-brandMuted:hover {
+      color: #0f172a !important;
+    }
+
+    html:not(.dark) aside #btn-src-builtin.bg-white\/10,
+    html:not(.dark) aside #btn-src-upload.bg-white\/10 {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    html:not(.dark) aside select,
+    html:not(.dark) aside #dataset-select,
+    html:not(.dark) aside #upload-target-select {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    html:not(.dark) aside #drop-zone {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+    }
+    html:not(.dark) aside #drop-zone:hover {
+      background-color: #f1f5f9 !important;
+      border-color: #6366f1 !important;
+    }
+
+    html:not(.dark) aside #dataset-desc {
+      color: #64748b !important;
+    }
+
+    html:not(.dark) aside .text-brandMuted {
+      color: #64748b !important;
+    }
+
+    html:not(.dark) aside .border-white\/\[0\.07\],
+    html:not(.dark) aside .border-white\/\[0\.06\],
+    html:not(.dark) aside .border-white\/\[0\.08\],
+    html:not(.dark) aside .border-white\/\[0\.1\] {
+      border-color: #e2e8f0 !important;
+    }
+
+    html:not(.dark) aside .bg-white\/\[0\.08\],
+    html:not(.dark) aside .bg-white\/\[0\.05\],
+    html:not(.dark) aside .bg-white\/\[0\.04\] {
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    /* Surfaces and Cards in bright mode (explicit card containers only) */
+    html:not(.dark) .bg-brandSurface,
+    html:not(.dark) .metric-card,
+    html:not(.dark) #mode-panel-interactive,
+    html:not(.dark) #mode-panel-auto,
+    html:not(.dark) #mode-panel-training,
+    html:not(.dark) #mode-panel-results,
+    html:not(.dark) #chart-privacy-accuracy,
+    html:not(.dark) #chart-mia-risk,
+    html:not(.dark) #chart-epoch-curves,
+    html:not(.dark) #section-audited-benchmarks,
+    html:not(.dark) #section-distributed-table {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 4px 16px -4px rgba(15, 23, 42, 0.04) !important;
+    }
+
+    /* Container sections must be seamless and transparent (no sharp background slabs) */
+    html:not(.dark) section.flex.flex-col.gap-4,
+    html:not(.dark) #section-telemetry-curves,
+    html:not(.dark) #section-dataset-metrics {
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    html:not(.dark) .border-subtle {
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) .border-subtle-hover:hover {
+      border-color: #c7d2fe !important;
+      box-shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.08) !important;
+    }
+
+    /* General Typography in bright mode */
+    html:not(.dark) .text-white,
+    html:not(.dark) h1,
+    html:not(.dark) h2,
+    html:not(.dark) h3,
+    html:not(.dark) .font-semibold.text-white,
+    html:not(.dark) .font-bold.text-white,
+    html:not(.dark) .stat-counter {
+      color: #0f172a !important;
+    }
+
+    html:not(.dark) .text-brandText {
+      color: #1e293b !important;
+    }
+
+    html:not(.dark) .text-brandMuted {
+      color: #64748b !important;
+    }
+
+    html:not(.dark) .section-title {
+      color: #475569 !important;
+    }
+
+    /* Hero text in bright mode */
+    html:not(.dark) #hero-title span:first-child {
+      color: #0f172a !important;
+    }
+    html:not(.dark) #hero-title span:last-child {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+
+    /* Active Dataset Badge Pill */
+    html:not(.dark) .inline-flex.bg-brandSurface {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Sliders and Selects in main area */
+    html:not(.dark) input[type=range] {
+      background: #e2e8f0 !important;
+    }
+    html:not(.dark) select#batch-select,
+    html:not(.dark) select#model-architecture-select,
+    html:not(.dark) select#optimizer-select {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    /* Sub-containers with semi-transparent white backgrounds */
+    html:not(.dark) .bg-white\/\[0\.02\],
+    html:not(.dark) .bg-white\/\[0\.03\],
+    html:not(.dark) .bg-white\/\[0\.04\],
+    html:not(.dark) .bg-white\/\[0\.05\],
+    html:not(.dark) .bg-white\/\[0\.06\] {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    /* Audited Benchmarks Table */
+    html:not(.dark) #benchmarks-tbody tr:hover {
+      background-color: #f8fafc !important;
+    }
+    html:not(.dark) thead th {
+      background-color: #f1f5f9 !important;
+      color: #475569 !important;
+      border-bottom-color: #e2e8f0 !important;
+    }
+    html:not(.dark) tbody td {
+      border-bottom-color: #f1f5f9 !important;
+    }
+    html:not(.dark) tbody td span.text-white,
+    html:not(.dark) tbody td.text-white {
+      color: #0f172a !important;
+    }
+
+    /* Charts & SVG Canvas in bright mode */
+    html:not(.dark) svg text {
+      fill: #64748b !important;
+    }
+    html:not(.dark) svg line[stroke*="rgba(255,255,255"] {
+      stroke: rgba(15, 23, 42, 0.08) !important;
+    }
+    html:not(.dark) #baseline-acc-text {
+      fill: #dc2626 !important;
+    }
+    html:not(.dark) #baseline-acc-line {
+      stroke: #dc2626 !important;
+    }
+    html:not(.dark) #curve-acc {
+      stroke: #2563eb !important;
+    }
+    html:not(.dark) #curve-acc-area {
+      fill: url(#cyanAreaLight) !important;
+    }
+    html:not(.dark) #acc-text-1,
+    html:not(.dark) #acc-text-2,
+    html:not(.dark) #acc-text-4 {
+      fill: #2563eb !important;
+    }
+    html:not(.dark) #acc-marker-1,
+    html:not(.dark) #acc-marker-2,
+    html:not(.dark) #acc-marker-4 {
+      stroke: #2563eb !important;
+      fill: #ffffff !important;
+    }
+    html:not(.dark) #acc-opt-pill rect {
+      fill: #ffffff !important;
+      stroke: #2563eb !important;
+      filter: drop-shadow(0 2px 6px rgba(37, 99, 235, 0.15));
+    }
+    html:not(.dark) #acc-opt-text {
+      fill: #2563eb !important;
+    }
+    html:not(.dark) #curve-mia {
+      stroke: #c026d3 !important;
+    }
+    html:not(.dark) #interactive-acc-tag rect,
+    html:not(.dark) #interactive-mia-tag rect,
+    html:not(.dark) #interactive-epoch-tag rect,
+    html:not(.dark) #interactive-epoch-flag rect {
+      fill: #ffffff !important;
+      stroke: #4f46e5 !important;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1)) !important;
+    }
+    html:not(.dark) #interactive-epoch-flag-text {
+      fill: #0f172a !important;
+    }
+    html:not(.dark) #interactive-epoch-line {
+      stroke: #4f46e5 !important;
+    }
+
+    /* Overlays on Charts */
+    html:not(.dark) #chart-a-empty-overlay,
+    html:not(.dark) #chart-b-empty-overlay,
+    html:not(.dark) #chart-c-empty-overlay {
+      background-color: rgba(255, 255, 255, 0.88) !important;
+      backdrop-filter: blur(2px) !important;
+    }
+    html:not(.dark) #chart-a-empty-overlay > div,
+    html:not(.dark) #chart-b-empty-overlay > div,
+    html:not(.dark) #chart-c-empty-overlay > div {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      color: #475569 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Insight Cards in Summary section */
+    html:not(.dark) .insight-card {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) .insight-card .text-white {
+      color: #0f172a !important;
+    }
+
+    /* Floating Tour Chips */
+    html:not(.dark) .tour-def-chip {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #1e293b !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+    }
+
+    /* Auto demo step pills */
+    html:not(.dark) .auto-step-pill {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+      color: #334155 !important;
+    }
+    html:not(.dark) .auto-step-pill:hover {
+      background-color: #f1f5f9 !important;
+    }
+
+    /* Auto demo narrative box & definition component */
+    html:not(.dark) #auto-narrative-box {
+      background: linear-gradient(135deg, #eef2ff 0%, #ffffff 50%, #faf5ff 100%) !important;
+      border-color: #c7d2fe !important;
+      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.15) !important;
+    }
+    html:not(.dark) #auto-narrative-desc {
+      color: #334155 !important;
+    }
+    html:not(.dark) #auto-narrative-box button {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #4f46e5 !important;
+    }
+    html:not(.dark) #auto-narrative-box button:hover {
+      background-color: #eef2ff !important;
+      color: #3730a3 !important;
+    }
+
+    /* Interactive Summary Card in bright mode */
+    html:not(.dark) #interactive-summary-card {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 55%, #f0fdfa 100%) !important;
+      border-color: #86efac !important;
+      box-shadow: 0 12px 30px -5px rgba(16, 185, 129, 0.18) !important;
+    }
+    html:not(.dark) #interactive-summary-card h4 span:first-child {
+      color: #065f46 !important;
+    }
+    html:not(.dark) #interactive-summary-card .bg-blue-500\/10 {
+      background-color: #eff6ff !important;
+      border-color: #bfdbfe !important;
+    }
+    html:not(.dark) #result-model-acc {
+      color: #1e40af !important;
+    }
+    html:not(.dark) #interactive-summary-card .bg-cyan-500\/10 {
+      background-color: #ecfeff !important;
+      border-color: #a5f3fc !important;
+    }
+    html:not(.dark) #result-model-f1 {
+      color: #0e7490 !important;
+    }
+    html:not(.dark) #interactive-summary-card .bg-emerald-500\/10 {
+      background-color: #f0fdf4 !important;
+      border-color: #bbf7d0 !important;
+    }
+    html:not(.dark) #result-model-mia {
+      color: #047857 !important;
+    }
+    html:not(.dark) #interactive-summary-card .bg-fuchsia-500\/10 {
+      background-color: #fdf4ff !important;
+      border-color: #f5d0fe !important;
+    }
+    html:not(.dark) #result-model-sigma {
+      color: #a21caf !important;
+    }
+    html:not(.dark) #interactive-summary-card .bg-indigo-500\/10 {
+      background-color: #eef2ff !important;
+      border-color: #c7d2fe !important;
+    }
+    html:not(.dark) #result-model-regimen {
+      color: #4338ca !important;
+    }
+
+    /* Interactive Training Progress Box in bright mode (Image 2 fix) */
+    html:not(.dark) #interactive-progress-box {
+      background: #ffffff !important;
+      background-image: none !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06) !important;
+    }
+    html:not(.dark) #interactive-progress-status {
+      color: #4f46e5 !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #interactive-progress-status span.animate-spin {
+      border-color: #4f46e5 !important;
+      border-top-color: transparent !important;
+    }
+    html:not(.dark) #interactive-progress-text {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+    html:not(.dark) #interactive-progress-pct {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #interactive-progress-box .bg-white\/\[0\.08\] {
+      background-color: #e2e8f0 !important;
+    }
+
+    /* Section 5: Tab Switcher & Filters in bright mode */
+    html:not(.dark) .bench-tab-container {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+    }
+    html:not(.dark) #tab-btn-distributed.text-slate-400,
+    html:not(.dark) #tab-btn-empirical.text-slate-400 {
+      color: #64748b !important;
+    }
+    html:not(.dark) #tab-btn-distributed.text-slate-400:hover,
+    html:not(.dark) #tab-btn-empirical.text-slate-400:hover {
+      color: #0f172a !important;
+      background-color: #e2e8f0 !important;
+    }
+    html:not(.dark) #table-dataset-name {
+      color: #3730a3 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-empirical span.text-slate-300,
+    html:not(.dark) #tab-pane-empirical span.text-slate-400 {
+      color: #475569 !important;
+      font-weight: 500 !important;
+    }
+    html:not(.dark) #tab-pane-empirical strong.text-white {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) .bench-filter-container,
+    html:not(.dark) #tab-pane-empirical .bg-black\/40 {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+    }
+    html:not(.dark) .bench-filter-btn.bg-white\/\[0\.04\] {
+      background-color: #ffffff !important;
+      color: #475569 !important;
+      border-color: #cbd5e1 !important;
+    }
+    html:not(.dark) .bench-filter-btn.bg-white\/\[0\.04\]:hover {
+      background-color: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) .bench-filter-btn.bg-indigo-600 {
+      background-color: #4f46e5 !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3) !important;
+    }
+    html:not(.dark) .bench-filter-btn.bg-emerald-500\/10,
+    html:not(.dark) .bench-filter-btn.bg-emerald-500\/20 {
+      background-color: #ecfdf5 !important;
+      color: #065f46 !important;
+      border-color: #a7f3d0 !important;
+    }
+    html:not(.dark) .bench-filter-btn.bg-purple-500\/10,
+    html:not(.dark) .bench-filter-btn.bg-purple-500\/20 {
+      background-color: #faf5ff !important;
+      color: #6b21a8 !important;
+      border-color: #e9d5ff !important;
+    }
+    html:not(.dark) .bench-filter-btn.bg-rose-500\/10,
+    html:not(.dark) .bench-filter-btn.bg-rose-500\/20 {
+      background-color: #fff1f2 !important;
+      color: #9f1239 !important;
+      border-color: #fecdd3 !important;
+    }
+
+    /* Section 5 Tab 1: Empirical Benchmarks Table in bright mode (Image 1 fix) */
+    html:not(.dark) #tab-pane-empirical > div.overflow-x-auto {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05) !important;
+    }
+    html:not(.dark) #tab-pane-empirical table {
+      background-color: #ffffff !important;
+    }
+    html:not(.dark) #tab-pane-empirical thead tr {
+      background: #f8fafc !important;
+      border-bottom-color: #e2e8f0 !important;
+    }
+    html:not(.dark) #tab-pane-empirical thead th {
+      color: #334155 !important;
+      background: #f8fafc !important;
+      font-weight: 700 !important;
+      border-bottom: 2px solid #e2e8f0 !important;
+    }
+    html:not(.dark) #benchmarks-tbody {
+      background-color: #ffffff !important;
+    }
+    html:not(.dark) #benchmarks-tbody tr {
+      background-color: #ffffff !important;
+      border-bottom: 1px solid #f1f5f9 !important;
+    }
+    html:not(.dark) #benchmarks-tbody tr:hover {
+      background-color: #f8fafc !important;
+    }
+    html:not(.dark) #benchmarks-tbody tr.bg-indigo-500\/10 {
+      background-color: #f0f4ff !important;
+      border-left: 3px solid #4f46e5 !important;
+    }
+    html:not(.dark) #benchmarks-tbody tr.bg-indigo-500\/10 td {
+      background-color: #f0f4ff !important;
+    }
+    html:not(.dark) #benchmarks-tbody td {
+      color: #0f172a !important;
+      border-bottom-color: #f1f5f9 !important;
+    }
+    html:not(.dark) #benchmarks-tbody td .text-white,
+    html:not(.dark) #benchmarks-tbody td.text-white {
+      color: #0f172a !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #benchmarks-tbody td .text-slate-300,
+    html:not(.dark) #benchmarks-tbody td.text-slate-300 {
+      color: #475569 !important;
+      font-weight: 500 !important;
+    }
+    html:not(.dark) #benchmarks-tbody td .text-\[\#4facfe\] {
+      color: #0284c7 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #benchmarks-tbody td .text-emerald-400 {
+      color: #047857 !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #benchmarks-tbody td .text-amber-400 {
+      color: #b45309 !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #benchmarks-tbody td .text-rose-400 {
+      color: #be123c !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #benchmarks-tbody td .bg-emerald-500\/15 {
+      background-color: #ecfdf5 !important;
+      color: #065f46 !important;
+      border-color: #a7f3d0 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #benchmarks-tbody td .bg-amber-500\/15 {
+      background-color: #fffbeb !important;
+      color: #92400e !important;
+      border-color: #fde68a !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #benchmarks-tbody td .bg-rose-500\/15 {
+      background-color: #fff1f2 !important;
+      color: #9f1239 !important;
+      border-color: #fecdd3 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #benchmarks-tbody td .bg-indigo-500\/20 {
+      background-color: #e0e7ff !important;
+      color: #3730a3 !important;
+      border-color: #c7d2fe !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-empirical div.border-t .text-slate-300 {
+      color: #475569 !important;
+    }
+    html:not(.dark) #tab-pane-empirical button[onclick="downloadCSVReport()"] {
+      background-color: #ffffff !important;
+      color: #047857 !important;
+      border-color: #a7f3d0 !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+    }
+    html:not(.dark) #tab-pane-empirical button[onclick="downloadCSVReport()"]:hover {
+      background-color: #ecfdf5 !important;
+      color: #065f46 !important;
+      border-color: #10b981 !important;
+    }
+
+    /* Section 5 Tab 2: Table I Distributed Frameworks in bright mode (Image 3 fix) */
+    html:not(.dark) #tab-pane-distributed > div.overflow-x-auto {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05) !important;
+    }
+    html:not(.dark) #tab-pane-distributed table {
+      background-color: #ffffff !important;
+    }
+    html:not(.dark) #tab-pane-distributed thead tr {
+      background: #f8fafc !important;
+      border-bottom-color: #e2e8f0 !important;
+    }
+    html:not(.dark) #tab-pane-distributed thead th {
+      color: #334155 !important;
+      background: #f8fafc !important;
+      font-weight: 700 !important;
+      border-bottom: 2px solid #e2e8f0 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody tr {
+      background-color: #ffffff !important;
+      border-bottom: 1px solid #f1f5f9 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody tr:hover {
+      background-color: #f8fafc !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody tr.bg-indigo-500\/\[0\.08\] {
+      background-color: #f0f4ff !important;
+      border-left: 3px solid #4f46e5 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody tr.bg-indigo-500\/\[0\.08\] td {
+      background-color: #f0f4ff !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td {
+      border-bottom-color: #f1f5f9 !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .text-white,
+    html:not(.dark) #tab-pane-distributed tbody td .font-medium.text-white,
+    html:not(.dark) #tab-pane-distributed tbody td .font-semibold.text-white {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .text-slate-100,
+    html:not(.dark) #tab-pane-distributed tbody td .text-slate-200,
+    html:not(.dark) #tab-pane-distributed tbody td .text-brandText {
+      color: #1e293b !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .text-slate-300,
+    html:not(.dark) #tab-pane-distributed tbody td .text-slate-400,
+    html:not(.dark) #tab-pane-distributed tbody td .text-indigo-200\/80,
+    html:not(.dark) #tab-pane-distributed tbody td .text-brandMuted {
+      color: #475569 !important;
+      font-weight: 500 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .bg-emerald-500\/10,
+    html:not(.dark) #tab-pane-distributed tbody td .bg-emerald-500\/15 {
+      background-color: #ecfdf5 !important;
+      color: #065f46 !important;
+      border-color: #a7f3d0 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .bg-indigo-500\/10,
+    html:not(.dark) #tab-pane-distributed tbody td .bg-indigo-500\/20 {
+      background-color: #eef2ff !important;
+      color: #3730a3 !important;
+      border-color: #c7d2fe !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .bg-cyan-500\/10,
+    html:not(.dark) #tab-pane-distributed tbody td .bg-cyan-500\/20 {
+      background-color: #ecfeff !important;
+      color: #155e75 !important;
+      border-color: #a5f3fc !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .bg-purple-500\/10,
+    html:not(.dark) #tab-pane-distributed tbody td .bg-purple-500\/15,
+    html:not(.dark) #tab-pane-distributed tbody td .bg-purple-500\/20 {
+      background-color: #faf5ff !important;
+      color: #6b21a8 !important;
+      border-color: #e9d5ff !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .bg-amber-500\/10,
+    html:not(.dark) #tab-pane-distributed tbody td .bg-amber-500\/15 {
+      background-color: #fffbeb !important;
+      color: #92400e !important;
+      border-color: #fde68a !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .bg-blue-500\/10,
+    html:not(.dark) #tab-pane-distributed tbody td .bg-blue-500\/15 {
+      background-color: #eff6ff !important;
+      color: #1e40af !important;
+      border-color: #bfdbfe !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .bg-rose-500\/10,
+    html:not(.dark) #tab-pane-distributed tbody td .bg-rose-500\/15 {
+      background-color: #fff1f2 !important;
+      color: #9f1239 !important;
+      border-color: #fecdd3 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .text-amber-400 {
+      color: #b45309 !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .text-emerald-400 {
+      color: #047857 !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #tab-pane-distributed tbody td .text-rose-400 {
+      color: #be123c !important;
+      font-weight: 600 !important;
+    }
+
+    /* Section 5 Architecture Cards in bright mode (Image 3 fix) */
+    html:not(.dark) #tab-pane-distributed .arch-dive-card {
+      background: #ffffff !important;
+      background-image: none !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05) !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-dive-card:hover {
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 6px 20px -2px rgba(15, 23, 42, 0.08) !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-dive-card .text-white {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-dive-card p {
+      color: #334155 !important;
+      font-size: 12px !important;
+      line-height: 1.6 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-dive-card strong {
+      color: #0f172a !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-card-1 {
+      border-top: 3px solid #10b981 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-card-1 strong.text-emerald-400 {
+      color: #059669 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-card-1 div[class*="border-t"] {
+      border-top-color: #f1f5f9 !important;
+      color: #059669 !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-card-2 {
+      border-top: 3px solid #f59e0b !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-card-2 strong.text-amber-300 {
+      color: #d97706 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-card-2 strong.text-rose-400 {
+      color: #e11d48 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-card-2 div[class*="border-t"] {
+      border-top-color: #f1f5f9 !important;
+      color: #d97706 !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-card-3 {
+      border-top: 3px solid #6366f1 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-card-3 strong.text-purple-300,
+    html:not(.dark) #tab-pane-distributed .arch-card-3 strong.text-cyan-300 {
+      color: #4f46e5 !important;
+    }
+    html:not(.dark) #tab-pane-distributed .arch-card-3 div[class*="border-t"] {
+      border-top-color: #f1f5f9 !important;
+      color: #4f46e5 !important;
+      font-weight: 600 !important;
+    }
+
+    /* Theme toggle pill button styles */
+    .theme-toggle-pill {
+      background: rgba(22, 27, 34, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+    }
+    .theme-toggle-pill:hover {
+      border-color: rgba(102, 126, 234, 0.5);
+      box-shadow: 0 0 14px rgba(102, 126, 234, 0.25);
+      transform: translateY(-1px);
+    }
+    html:not(.dark) .theme-toggle-pill {
+      background: rgba(255, 255, 255, 0.95) !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08) !important;
+    }
+    html:not(.dark) .theme-toggle-pill:hover {
+      border-color: #6366f1 !important;
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15) !important;
+      transform: translateY(-1px);
+    }
+
+    /* Hero & Telemetry light mode refinements (Images 1 & 2 fixes) */
+    html:not(.dark) section .inline-flex.rounded-full.bg-indigo-500\/10 {
+      background-color: #eef2ff !important;
+      border-color: #c7d2fe !important;
+      color: #4338ca !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) section .inline-flex.rounded-full.bg-indigo-500\/10 span.bg-indigo-400 {
+      background-color: #4f46e5 !important;
+    }
+    html:not(.dark) #telemetry-audit-sub {
+      color: #475569 !important;
+      font-weight: 500 !important;
+    }
+    html:not(.dark) #chart-privacy-accuracy span.bg-emerald-500\/10,
+    html:not(.dark) #chart-mia-risk span.bg-emerald-500\/10 {
+      background-color: #ecfdf5 !important;
+      color: #047857 !important;
+      border-color: #a7f3d0 !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #chart-privacy-accuracy span.text-\[\#4facfe\] {
+      color: #0284c7 !important;
+      background-color: #f0f9ff !important;
+      border-color: #bae6fd !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #chart-mia-risk span.text-purple-400 {
+      color: #7c3aed !important;
+      background-color: #faf5ff !important;
+      border-color: #e9d5ff !important;
+      font-weight: 600 !important;
+    }
+
+    /* Full Training Completion Card in bright mode (Image 3 fix) */
+    html:not(.dark) #full-training-completion-card {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 40%, #f0fdfa 100%) !important;
+      border: 1px solid #10b981 !important;
+      box-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.12), 0 2px 8px -2px rgba(15, 23, 42, 0.05) !important;
+    }
+    html:not(.dark) #full-training-completion-card span.text-white {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #full-training-completion-card span.bg-emerald-500\/10 {
+      background-color: #ecfdf5 !important;
+      color: #047857 !important;
+      border-color: #a7f3d0 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #full-training-completion-card .p-2\.5 {
+      background-color: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04) !important;
+    }
+    html:not(.dark) #full-training-completion-card .p-2\.5:hover {
+      border-color: #cbd5e1 !important;
+    }
+    html:not(.dark) #full-training-completion-card .text-brandMuted {
+      color: #475569 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #ft-res-base {
+      color: #0f172a !important;
+      font-weight: 800 !important;
+    }
+    html:not(.dark) #ft-res-opt {
+      color: #0284c7 !important;
+      font-weight: 800 !important;
+    }
+    html:not(.dark) #ft-res-safe {
+      color: #047857 !important;
+      font-weight: 800 !important;
+    }
+    html:not(.dark) #full-training-completion-card .text-rose-400 {
+      color: #dc2626 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #full-training-completion-card .text-emerald-400 {
+      color: #059669 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #full-training-completion-card .text-blue-400 {
+      color: #2563eb !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #full-training-completion-card button {
+      background-color: #ffffff !important;
+      color: #1e293b !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #full-training-completion-card button:hover {
+      background-color: #f1f5f9 !important;
+      border-color: #94a3b8 !important;
+    }
+    html:not(.dark) #full-training-completion-card button:last-child {
+      background-color: #ecfdf5 !important;
+      color: #047857 !important;
+      border: 1px solid #a7f3d0 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #full-training-completion-card button:last-child:hover {
+      background-color: #d1fae5 !important;
+      color: #065f46 !important;
+      border-color: #6ee7b7 !important;
+    }
+
+    /* Training Pipeline Progress Container in bright mode */
+    html:not(.dark) #training-progress-container .text-white {
+      color: #0f172a !important;
+    }
+    html:not(.dark) #training-progress-container .bg-white\/\[0\.08\] {
+      background-color: #e2e8f0 !important;
+    }
+
+    /* Mode Panel Results & 3 KPI Cards in bright mode (Image 4 fix) */
+    html:not(.dark) #mode-panel-results {
+      background: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05) !important;
+    }
+    html:not(.dark) #mode-panel-results .border-b {
+      border-bottom-color: #e2e8f0 !important;
+    }
+    html:not(.dark) #mode-panel-results .bg-cyan-500\/10 {
+      background-color: #ecfeff !important;
+      color: #0284c7 !important;
+      border-color: #a5f3fc !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #mode-panel-results .bg-black\/25 {
+      background: #ffffff !important;
+      background-color: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05) !important;
+    }
+    html:not(.dark) #mode-panel-results .bg-black\/25:hover {
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 6px 20px -2px rgba(15, 23, 42, 0.08) !important;
+    }
+    html:not(.dark) #mode-panel-results .bg-black\/25 .text-white {
+      color: #0f172a !important;
+      font-weight: 800 !important;
+    }
+    html:not(.dark) #mode-panel-results .bg-black\/25 .text-brandMuted {
+      color: #334155 !important;
+      font-weight: 500 !important;
+      line-height: 1.5 !important;
+    }
+    html:not(.dark) #mode-panel-results .bg-black\/25 .text-emerald-400 {
+      color: #059669 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #mode-panel-results .bg-black\/25 .text-brandPrimary {
+      color: #4f46e5 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #mode-panel-results .bg-black\/25 .text-amber-400 {
+      color: #d97706 !important;
+      font-weight: 700 !important;
+    }
+    html:not(.dark) #mode-panel-results button[onclick="downloadCSVReport()"] {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #mode-panel-results button[onclick="downloadCSVReport()"]:hover {
+      background-color: #f8fafc !important;
+      border-color: #94a3b8 !important;
+    }
+    html:not(.dark) #mode-panel-results .bench-filter-btn {
+      background-color: #f8fafc !important;
+      color: #475569 !important;
+      border: 1px solid #cbd5e1 !important;
+      font-weight: 600 !important;
+    }
+    html:not(.dark) #mode-panel-results .bench-filter-btn:hover {
+      background-color: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) #mode-panel-results .bench-filter-btn.bg-white\/\[0\.1\],
+    html:not(.dark) #mode-panel-results .bench-filter-btn.bg-indigo-600 {
+      background-color: #4f46e5 !important;
+      color: #ffffff !important;
+      border-color: #4338ca !important;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3) !important;
+    }
+    html:not(.dark) #mode-panel-results button[onclick*="benchmarks-tbody"] {
+      color: #4338ca !important;
+      font-weight: 600 !important;
+    }
 </style>
 </head>
 <body class="h-screen w-screen bg-brandBg text-brandText flex overflow-hidden antialiased selection:bg-brandPrimary/30 selection:text-white" style="height:100vh;max-height:100vh;overflow:hidden;">
@@ -201,15 +1177,65 @@
 <aside class="w-[260px] flex-shrink-0 h-screen sticky top-0 bg-gradient-to-b from-[#0f0c29] to-[#302b63] border-r border-white/[0.06] flex flex-col justify-between p-5 z-40 select-none">
 <!-- Top Container -->
 <div class="flex flex-col gap-5">
-<!-- 1. Logo Row -->
+<!-- 1. Logo Row: Epsilon Differential Privacy Studio -->
 <div class="flex items-center justify-between pt-1">
-<div class="flex items-center gap-2">
-<span class="text-xl">🔒</span>
-<span class="font-bold text-white text-base tracking-tight font-sans">DP-ML</span>
-</div>
-<span class="font-mono text-[11px] font-semibold text-[#f093fb] bg-white/[0.08] px-2 py-0.5 rounded border border-white/[0.1]">
-          v2.4
-        </span>
+  <div class="flex items-center gap-2.5">
+    <div id="app-logo-container" class="w-9 h-9 rounded-xl overflow-hidden shadow-lg flex-shrink-0 flex items-center justify-center border transition-all">
+      <!-- Dark Mode Vector Logo -->
+      <svg id="app-logo-dark" class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="epsBgDark" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#3b367d"/>
+            <stop offset="50%" stop-color="#46408f"/>
+            <stop offset="100%" stop-color="#544ea5"/>
+          </linearGradient>
+          <filter id="logoGlowDark" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.5" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <rect width="100" height="100" rx="24" fill="url(#epsBgDark)" stroke="rgba(255,255,255,0.15)" stroke-width="1.2"/>
+        <path d="M 68 28.5 C 44 26.5 28 35 28 47.5 C 28 53.5 39 51.5 48 50 C 39 50.5 28 55 28 66 C 28 78 44 83.5 68 73.5" 
+              stroke="#eef2ff" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="58" cy="43.5" r="4.2" fill="#f59e0b" filter="url(#logoGlowDark)"/>
+        <circle cx="69" cy="52.5" r="3.2" fill="#fbbf24" filter="url(#logoGlowDark)"/>
+        <circle cx="61" cy="62.5" r="2.5" fill="#d97706" filter="url(#logoGlowDark)"/>
+      </svg>
+      <!-- Bright Mode Vector Logo (Matches user light logo) -->
+      <svg id="app-logo-light" class="w-full h-full hidden" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="epsBgLight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f2f1fe"/>
+            <stop offset="50%" stop-color="#ebe8fb"/>
+            <stop offset="100%" stop-color="#e3def8"/>
+          </linearGradient>
+          <filter id="logoGlowLight" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="0.8" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <rect width="100" height="100" rx="24" fill="url(#epsBgLight)" stroke="rgba(99, 102, 241, 0.28)" stroke-width="1.2"/>
+        <path d="M 68 28.5 C 44 26.5 28 35 28 47.5 C 28 53.5 39 51.5 48 50 C 39 50.5 28 55 28 66 C 28 78 44 83.5 68 73.5" 
+              stroke="#6366f1" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="58" cy="43.5" r="4.0" fill="#f59e0b" filter="url(#dotGlowLight)"/>
+        <circle cx="69" cy="52.5" r="3.0" fill="#fbbf24" filter="url(#dotGlowLight)"/>
+        <circle cx="61" cy="62.5" r="2.4" fill="#d97706" filter="url(#dotGlowLight)"/>
+      </svg>
+    </div>
+    <div class="flex flex-col">
+      <div class="flex items-center gap-1.5">
+        <span class="font-bold text-white text-base tracking-tight font-sans leading-none">Epsilon</span>
+        <span class="font-mono text-[9px] font-semibold text-emerald-400 bg-emerald-500/15 px-1.5 py-0.5 rounded border border-emerald-500/30">v2.4</span>
+      </div>
+      <span class="text-[9.5px] text-indigo-200/70 font-medium tracking-tight mt-0.5 font-sans">Differential Privacy Studio</span>
+    </div>
+  </div>
 </div>
 <!-- Separator Line -->
 <div class="h-[1px] w-full bg-white/[0.07]"></div>
@@ -243,19 +1269,19 @@
 </div>
 <!-- Upload CSV View (Hidden by default) -->
 <div class="hidden flex-col gap-2 mt-1" id="panel-upload">
-<div class="border border-dashed border-white/20 hover:border-brandPrimary/70 rounded-lg p-3.5 flex flex-col items-center justify-center text-center cursor-pointer bg-black/20 hover:bg-black/40 transition-colors">
-<span class="material-symbols-outlined text-brandPrimary text-2xl mb-1">upload_file</span>
-<span class="text-xs text-brandText font-medium">Drop CSV here</span>
-<span class="text-[10px] text-brandMuted mt-0.5">or browse up to 50MB</span>
-</div>
-<div class="relative">
-<select class="w-full bg-[#161b22]/90 border border-white/[0.08] text-[11px] text-brandMuted rounded-lg px-2.5 py-1.5 appearance-none focus:outline-none focus:border-brandPrimary/70">
-<option>Target: Auto-detect label</option>
-<option>Target: column_0</option>
-<option>Target: target_class</option>
-</select>
-<span class="material-symbols-outlined text-brandMuted pointer-events-none absolute right-2 top-2 text-[14px]">expand_more</span>
-</div>
+  <input type="file" id="csv-file-input" accept=".csv,text/csv" class="hidden" onchange="handleFileSelect(event)">
+  <div id="drop-zone" onclick="document.getElementById('csv-file-input').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleFileDrop(event)" class="border border-dashed border-white/20 hover:border-brandPrimary/70 rounded-lg p-3.5 flex flex-col items-center justify-center text-center cursor-pointer bg-black/20 hover:bg-black/40 transition-all select-none group">
+    <span id="drop-icon" class="material-symbols-outlined text-brandPrimary group-hover:scale-110 text-2xl mb-1 transition-transform">upload_file</span>
+    <span id="drop-title" class="text-xs text-brandText font-medium">Drop CSV here</span>
+    <span id="drop-sub" class="text-[10px] text-brandMuted mt-0.5">or click to browse file</span>
+  </div>
+  <div class="relative">
+    <select id="upload-target-select" onchange="handleTargetColumnChange(this.value)" class="w-full bg-[#161b22]/90 border border-white/[0.08] text-[11px] text-brandText rounded-lg px-2.5 py-1.5 appearance-none focus:outline-none focus:border-brandPrimary/70 cursor-pointer font-sans">
+      <option value="">Target: Upload CSV first</option>
+    </select>
+    <span class="material-symbols-outlined text-brandMuted pointer-events-none absolute right-2 top-2 text-[14px]">expand_more</span>
+  </div>
+  <div id="upload-status-info" class="hidden text-[10px] text-emerald-400 font-mono bg-emerald-500/10 p-1.5 rounded border border-emerald-500/20 text-center truncate"></div>
 </div>
 </div>
 <!-- Separator Line -->
@@ -304,19 +1330,31 @@
 <!-- ========================================================================= -->
 <!-- MAIN CONTENT (flex-1 scrollable with padding: 48px 56px, max-width 1200px) -->
 <!-- ========================================================================= -->
-<main id="main-scroller" class="flex-1 h-screen overflow-y-auto px-7 md:px-14 py-12 flex justify-center" style="height:100vh;max-height:100vh;overflow-y:auto;scroll-behavior:smooth;">
+<main id="main-scroller" class="flex-1 h-screen overflow-y-auto px-7 md:px-14 py-12 flex justify-center relative" style="height:100vh;max-height:100vh;overflow-y:auto;scroll-behavior:smooth;">
+  <!-- Fixed Top-Right Theme Switcher Button -->
+  <div class="fixed top-5 right-6 md:right-10 z-50 flex items-center gap-2">
+    <button id="theme-toggle-btn" onclick="toggleTheme()" class="theme-toggle-pill flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all shadow-md backdrop-blur-md cursor-pointer border select-none group" title="Toggle Bright / Dark Mode">
+      <span id="theme-icon" class="material-symbols-outlined text-[17px] transition-transform duration-300 group-hover:rotate-45 text-amber-400">light_mode</span>
+      <span id="theme-text" class="font-sans font-medium tracking-tight">Bright Mode</span>
+    </button>
+  </div>
 <div class="w-full max-w-[1200px] flex flex-col gap-10">
 <!-- ===================================================================== -->
 <!-- SECTION 1: HERO -->
 <!-- ===================================================================== -->
 <section class="flex flex-col gap-4">
-<div>
-<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight font-sans" id="hero-title">
-            Privacy-Preserving Machine Learning
-          </h1>
-<p class="text-sm md:text-base text-brandMuted max-w-3xl mt-2 font-normal leading-relaxed" id="hero-sub">
-            Empirical evaluation of DP-SGD against Membership Inference Attacks across varying privacy budgets.
-          </p>
+<div class="flex flex-col gap-1.5">
+  <div class="inline-flex self-start items-center gap-2 px-2.5 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 text-[11px] font-medium">
+    <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+    <span>Epsilon · Differential Privacy Studio</span>
+  </div>
+  <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight font-sans flex flex-wrap items-center gap-2.5" id="hero-title">
+    <span>Epsilon</span>
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 font-semibold">Differential Privacy Studio</span>
+  </h1>
+  <p class="text-sm md:text-base text-brandMuted max-w-3xl mt-1 font-normal leading-relaxed" id="hero-sub">
+    Empirical Pareto-frontier trade-off evaluation &amp; membership inference attack defense across calibrated DP-SGD privacy budgets.
+  </p>
 </div>
 <!-- Active Dataset Badge Pill with subtle gradient border -->
 <div class="inline-flex self-start items-center gap-3 px-3 py-1.5 rounded-full bg-brandSurface border-subtle border-subtle-hover transition-all text-xs">
@@ -495,62 +1533,75 @@
     </div>
 
     <!-- Live Model Audit Summary Card (Revealed after training completes) -->
-    <div id="interactive-summary-card" class="hidden p-5 rounded-xl bg-black/50 border border-emerald-500/40 shadow-2xl flex flex-col gap-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.06] pb-3">
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono">Custom DP-SGD Model Training & Audit Complete</h4>
+    <div id="interactive-summary-card" class="hidden p-5 rounded-2xl bg-gradient-to-br from-emerald-950/40 via-[#161b22] to-indigo-950/40 border-2 border-emerald-500/50 shadow-2xl shadow-emerald-950/30 flex flex-col gap-4 transition-all">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-emerald-500/20 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_#10b981]"></span>
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono flex items-center gap-2">
+            <span>Custom DP-SGD Model Training &amp; Audit Complete</span>
+            <span class="px-2 py-0.5 rounded text-[9px] font-sans font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Verified</span>
+          </h4>
         </div>
-        <span id="interactive-privacy-guarantee" class="px-2.5 py-0.5 rounded text-[11px] font-mono bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+        <span id="interactive-privacy-guarantee" class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shadow-sm">
           Guaranteed (ε = 1.0, δ = 1.0e-5)
         </span>
       </div>
 
-      <!-- 5 High-contrast live KPI pills including F1-Score (Class Imbalance Metric) -->
+      <!-- 5 High-contrast live KPI pills with rich color theory -->
       <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
-        <div class="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-          <div class="text-[10px] uppercase font-mono text-brandMuted font-semibold">Trained Accuracy</div>
-          <div id="result-model-acc" class="text-xl font-bold text-white mt-1 font-mono">74.6%</div>
-          <div id="result-acc-diff" class="text-[10px] text-emerald-400 font-mono mt-0.5">-11.6% vs Baseline</div>
-        </div>
-
-        <div class="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-          <div class="text-[10px] uppercase font-mono text-[#4facfe] font-semibold flex items-center justify-between">
-            <span>F1-Score (Macro)</span>
-            <span class="text-[9px] text-brandMuted font-mono">Imbalance</span>
+        <!-- Box 1: Trained Accuracy -->
+        <div class="p-3.5 rounded-xl bg-blue-500/10 border border-blue-500/30 flex flex-col justify-between transition-all hover:border-blue-400/50">
+          <div class="text-[10px] uppercase font-mono text-blue-400 font-bold tracking-wider">Trained Accuracy</div>
+          <div id="result-model-acc" class="text-2xl font-black text-white mt-1 font-mono tracking-tight">74.6%</div>
+          <div id="result-acc-diff" class="text-[10px] text-emerald-400 font-mono mt-1 font-semibold flex items-center gap-1">
+            <span>↑</span><span id="result-acc-diff-val">-11.6% vs Baseline</span>
           </div>
-          <div id="result-model-f1" class="text-xl font-bold text-[#4facfe] mt-1 font-mono">54.2%</div>
-          <div id="result-f1-diff" class="text-[10px] text-amber-400 font-mono mt-0.5">-15.2% vs Baseline</div>
         </div>
 
-        <div class="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-          <div class="text-[10px] uppercase font-mono text-brandMuted font-semibold">MIA Risk (Shadow)</div>
-          <div id="result-model-mia" class="text-xl font-bold text-emerald-400 mt-1 font-mono">52.0%</div>
-          <div id="result-mia-badge" class="text-[10px] text-brandSafe font-mono mt-0.5">Low Attack Advantage</div>
+        <!-- Box 2: F1-Score Macro -->
+        <div class="p-3.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex flex-col justify-between transition-all hover:border-cyan-400/50">
+          <div class="text-[10px] uppercase font-mono text-cyan-400 font-bold tracking-wider flex items-center justify-between">
+            <span>F1-Score</span>
+            <span class="text-[9px] text-cyan-300/70 font-mono">Macro</span>
+          </div>
+          <div id="result-model-f1" class="text-2xl font-black text-cyan-300 mt-1 font-mono tracking-tight">54.2%</div>
+          <div id="result-f1-diff" class="text-[10px] text-amber-400 font-mono mt-1 font-semibold">-15.2% vs Baseline</div>
         </div>
 
-        <div class="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-          <div class="text-[10px] uppercase font-mono text-brandMuted font-semibold">Gaussian Noise (σ)</div>
-          <div id="result-model-sigma" class="text-xl font-bold text-[#f093fb] mt-1 font-mono">σ = 2.41</div>
-          <div class="text-[10px] text-brandMuted font-mono mt-0.5">Clip Bound C = 1.0</div>
+        <!-- Box 3: MIA Risk Shadow -->
+        <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex flex-col justify-between transition-all hover:border-emerald-400/50">
+          <div class="text-[10px] uppercase font-mono text-emerald-400 font-bold tracking-wider">MIA Risk (Shadow)</div>
+          <div id="result-model-mia" class="text-2xl font-black text-emerald-300 mt-1 font-mono tracking-tight">52.0%</div>
+          <div id="result-mia-badge" class="text-[10px] text-emerald-400 font-mono mt-1 font-semibold flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span>Low Attack Advantage</span>
+          </div>
         </div>
 
-        <div class="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06] col-span-2 lg:col-span-1">
-          <div class="text-[10px] uppercase font-mono text-brandMuted font-semibold">Training Regimen</div>
-          <div id="result-model-regimen" class="text-xl font-bold text-white mt-1 font-mono">15 Epochs</div>
-          <div id="result-batch-size" class="text-[10px] text-brandMuted font-mono mt-0.5">Batch Size 64</div>
+        <!-- Box 4: Gaussian Noise sigma -->
+        <div class="p-3.5 rounded-xl bg-fuchsia-500/10 border border-fuchsia-500/30 flex flex-col justify-between transition-all hover:border-fuchsia-400/50">
+          <div class="text-[10px] uppercase font-mono text-fuchsia-400 font-bold tracking-wider">Gaussian Noise (σ)</div>
+          <div id="result-model-sigma" class="text-2xl font-black text-fuchsia-300 mt-1 font-mono tracking-tight">σ = 2.41</div>
+          <div class="text-[10px] text-fuchsia-400/80 font-mono mt-1 font-medium">Clip Bound C = 1.0</div>
+        </div>
+
+        <!-- Box 5: Training Regimen -->
+        <div class="p-3.5 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex flex-col justify-between col-span-2 lg:col-span-1 transition-all hover:border-indigo-400/50">
+          <div class="text-[10px] uppercase font-mono text-indigo-400 font-bold tracking-wider">Training Regimen</div>
+          <div id="result-model-regimen" class="text-2xl font-black text-indigo-200 mt-1 font-mono tracking-tight">15 Epochs</div>
+          <div id="result-batch-size" class="text-[10px] text-indigo-300/80 font-mono mt-1 font-medium">Batch Size 64</div>
         </div>
       </div>
 
       <!-- Action buttons -->
-      <div class="flex items-center justify-between flex-wrap gap-3 pt-1">
-        <span class="text-xs text-brandMuted">Empirical audit validated. You can view this model on the telemetry curves or add it to the benchmarks table.</span>
-        <div class="flex items-center gap-2">
-          <button onclick="document.getElementById('chart-epoch-curves') ? document.getElementById('chart-epoch-curves').scrollIntoView({ behavior: 'smooth', block: 'center' }) : document.getElementById('chart-privacy-accuracy').scrollIntoView({ behavior: 'smooth', block: 'center' })" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/[0.06] text-white hover:bg-white/[0.12] border border-white/[0.1] transition-all flex items-center gap-1.5">
+      <div class="flex items-center justify-between flex-wrap gap-3 pt-2 border-t border-white/[0.06]">
+        <span class="text-xs text-brandMuted font-sans">Empirical differential privacy audit complete. Trace loss trajectories or record model in benchmarks table.</span>
+        <div class="flex items-center gap-2.5">
+          <button onclick="document.getElementById('chart-epoch-curves') ? document.getElementById('chart-epoch-curves').scrollIntoView({ behavior: 'smooth', block: 'center' }) : document.getElementById('chart-privacy-accuracy').scrollIntoView({ behavior: 'smooth', block: 'center' })" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/[0.08] text-white hover:bg-white/[0.15] border border-white/[0.15] transition-all flex items-center gap-1.5 shadow-sm">
             <span>View Training Curves</span>
             <span class="material-symbols-outlined text-xs">arrow_downward</span>
           </button>
-          <button id="btn-add-custom-table" onclick="addCustomModelToTable()" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 border border-emerald-500/40 transition-all flex items-center gap-1.5 shadow-md">
+          <button id="btn-add-custom-table" onclick="addCustomModelToTable()" class="px-4 py-1.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-600/30 hover:shadow-emerald-500/40">
             <span class="material-symbols-outlined text-xs">add_chart</span>
             <span id="btn-add-table-text">Add to Benchmarks Table</span>
           </button>
@@ -587,60 +1638,67 @@
     <div id="auto-tour-progress-bar" class="h-full bg-gradient-to-r from-[#667eea] via-[#f093fb] to-[#4facfe] transition-all duration-500 w-[16.6%]"></div>
   </div>
 
-  <!-- 6-Component Navigation Grid -->
+  <!-- 6-Component Navigation Grid with Signature Color Themes -->
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
-    <button onclick="jumpAutoStep(0)" id="auto-step-btn-0" class="auto-step-pill p-2.5 rounded-lg bg-brandPrimary/10 border border-brandPrimary/60 text-left transition-all hover:bg-white/[0.07]">
-      <div class="text-[9px] text-[#4facfe] font-mono font-semibold uppercase">Step 1</div>
-      <div class="text-[11px] font-bold text-white truncate">Dataset Metrics</div>
-      <div class="text-[9px] text-brandMuted truncate">Overview & partitions</div>
+    <button onclick="jumpAutoStep(0)" id="auto-step-btn-0" class="auto-step-pill p-2.5 rounded-xl border border-cyan-400 bg-cyan-500/20 text-cyan-300 ring-2 ring-cyan-500/40 shadow-lg shadow-cyan-500/20 text-left transition-all">
+      <div class="text-[10px] text-cyan-300 font-mono font-bold uppercase flex items-center justify-between">
+        <span>Step 1</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+      </div>
+      <div class="text-[12px] font-bold text-white truncate mt-0.5">Dataset Metrics</div>
+      <div class="text-[10px] text-cyan-200/80 truncate">Overview &amp; partitions</div>
     </button>
-    <button onclick="jumpAutoStep(1)" id="auto-step-btn-1" class="auto-step-pill p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06] text-left transition-all hover:bg-white/[0.07]">
-      <div class="text-[9px] text-emerald-400 font-mono font-semibold uppercase">Step 2</div>
-      <div class="text-[11px] font-bold text-white truncate">DP-SGD Budgets</div>
-      <div class="text-[9px] text-brandMuted truncate">ε = 0.5 to 10.0</div>
+    <button onclick="jumpAutoStep(1)" id="auto-step-btn-1" class="auto-step-pill p-2.5 rounded-xl border border-emerald-500/30 bg-emerald-500/5 text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-400/50 text-left transition-all">
+      <div class="text-[10px] text-emerald-400 font-mono font-bold uppercase">Step 2</div>
+      <div class="text-[12px] font-bold text-white truncate mt-0.5">DP-SGD Budgets</div>
+      <div class="text-[10px] text-slate-300 truncate">ε = 0.5 to 10.0</div>
     </button>
-    <button onclick="jumpAutoStep(2)" id="auto-step-btn-2" class="auto-step-pill p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06] text-left transition-all hover:bg-white/[0.07]">
-      <div class="text-[9px] text-[#4facfe] font-mono font-semibold uppercase">Step 3</div>
-      <div class="text-[11px] font-bold text-white truncate">Accuracy Curve</div>
-      <div class="text-[9px] text-brandMuted truncate">Validation telemetry</div>
+    <button onclick="jumpAutoStep(2)" id="auto-step-btn-2" class="auto-step-pill p-2.5 rounded-xl border border-blue-500/30 bg-blue-500/5 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400/50 text-left transition-all">
+      <div class="text-[10px] text-blue-400 font-mono font-bold uppercase">Step 3</div>
+      <div class="text-[12px] font-bold text-white truncate mt-0.5">Accuracy Curve</div>
+      <div class="text-[10px] text-slate-300 truncate">Validation telemetry</div>
     </button>
-    <button onclick="jumpAutoStep(3)" id="auto-step-btn-3" class="auto-step-pill p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06] text-left transition-all hover:bg-white/[0.07]">
-      <div class="text-[9px] text-[#f093fb] font-mono font-semibold uppercase">Step 4</div>
-      <div class="text-[11px] font-bold text-white truncate">MIA Defense</div>
-      <div class="text-[9px] text-brandMuted truncate">Shadow attack risks</div>
+    <button onclick="jumpAutoStep(3)" id="auto-step-btn-3" class="auto-step-pill p-2.5 rounded-xl border border-fuchsia-500/30 bg-fuchsia-500/5 text-fuchsia-400 hover:bg-fuchsia-500/10 hover:border-fuchsia-400/50 text-left transition-all">
+      <div class="text-[10px] text-fuchsia-400 font-mono font-bold uppercase">Step 4</div>
+      <div class="text-[12px] font-bold text-white truncate mt-0.5">MIA Defense</div>
+      <div class="text-[10px] text-slate-300 truncate">Shadow attack risks</div>
     </button>
-    <button onclick="jumpAutoStep(4)" id="auto-step-btn-4" class="auto-step-pill p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06] text-left transition-all hover:bg-white/[0.07]">
-      <div class="text-[9px] text-purple-400 font-mono font-semibold uppercase">Step 5</div>
-      <div class="text-[11px] font-bold text-white truncate">Epoch Dynamics</div>
-      <div class="text-[9px] text-brandMuted truncate">Loss convergence</div>
+    <button onclick="jumpAutoStep(4)" id="auto-step-btn-4" class="auto-step-pill p-2.5 rounded-xl border border-purple-500/30 bg-purple-500/5 text-purple-400 hover:bg-purple-500/10 hover:border-purple-400/50 text-left transition-all">
+      <div class="text-[10px] text-purple-400 font-mono font-bold uppercase">Step 5</div>
+      <div class="text-[12px] font-bold text-white truncate mt-0.5">Epoch Dynamics</div>
+      <div class="text-[10px] text-slate-300 truncate">Loss convergence</div>
     </button>
-    <button onclick="jumpAutoStep(5)" id="auto-step-btn-5" class="auto-step-pill p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06] text-left transition-all hover:bg-white/[0.07]">
-      <div class="text-[9px] text-amber-400 font-mono font-semibold uppercase">Step 6</div>
-      <div class="text-[11px] font-bold text-white truncate">Audit Benchmarks</div>
-      <div class="text-[9px] text-brandMuted truncate">5-Model table & reco</div>
+    <button onclick="jumpAutoStep(5)" id="auto-step-btn-5" class="auto-step-pill p-2.5 rounded-xl border border-amber-500/30 bg-amber-500/5 text-amber-400 hover:bg-amber-500/10 hover:border-amber-400/50 text-left transition-all">
+      <div class="text-[10px] text-amber-400 font-mono font-bold uppercase">Step 6</div>
+      <div class="text-[12px] font-bold text-white truncate mt-0.5">Audit Benchmarks</div>
+      <div class="text-[10px] text-slate-300 truncate">5-Model table &amp; reco</div>
     </button>
   </div>
 
-  <!-- Narrative Callout Box -->
-  <div class="p-4 rounded-xl bg-black/40 border border-white/[0.08] flex items-start justify-between gap-4">
-    <div class="flex items-start gap-3">
-      <span id="auto-narrative-icon" class="material-symbols-outlined text-brandPrimary text-2xl mt-0.5">analytics</span>
+  <!-- Narrative Callout Box (Definition Component) with High-Contrast Ambient Styling -->
+  <div id="auto-narrative-box" class="p-5 rounded-2xl bg-gradient-to-r from-indigo-950/60 via-[#131722] to-purple-950/60 border-2 border-indigo-500/40 shadow-xl shadow-indigo-950/40 flex items-start justify-between gap-4 transition-all">
+    <div class="flex items-start gap-4">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500/25 to-purple-500/25 border border-indigo-400/40 flex items-center justify-center shrink-0 shadow-inner">
+        <span id="auto-narrative-icon" class="material-symbols-outlined text-indigo-300 text-2xl">analytics</span>
+      </div>
       <div>
-        <div class="flex items-center gap-2 mb-1">
-          <span class="px-2 py-0.5 rounded text-[9px] font-mono bg-brandPrimary/20 text-brandPrimary border border-brandPrimary/40 font-bold uppercase tracking-wider">Definition</span>
-          <h4 id="auto-narrative-title" class="text-xs font-bold text-gradient-flow">Component 1 of 6: Dataset Overview & Partition Metrics</h4>
+        <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+          <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 border border-indigo-500/40 font-bold uppercase tracking-wider shadow-sm">
+            Architecture Definition
+          </span>
+          <h4 id="auto-narrative-title" class="text-sm font-bold text-gradient-flow">Component 1 of 6: Dataset Overview &amp; Partition Metrics</h4>
         </div>
-        <p id="auto-narrative-desc" class="text-xs text-brandMuted mt-1 leading-relaxed max-w-3xl">
+        <p id="auto-narrative-desc" class="text-xs sm:text-sm text-slate-200 mt-1 leading-relaxed max-w-3xl font-normal">
           Analyzes cohort demographics and splits the active dataset into an 80% private training corpus and 20% validation holdout, measuring feature dimensionality and target class balance.
         </p>
       </div>
     </div>
-    <div class="flex items-center gap-1.5 shrink-0">
-      <button onclick="stepPrevAuto()" class="p-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-brandMuted hover:text-white transition-all">
-        <span class="material-symbols-outlined text-sm">chevron_left</span>
+    <div class="flex items-center gap-2 shrink-0 self-center sm:self-start">
+      <button onclick="stepPrevAuto()" title="Previous Step" class="p-2 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/25 text-indigo-300 hover:text-white border border-indigo-500/30 transition-all flex items-center justify-center shadow-sm">
+        <span class="material-symbols-outlined text-base">chevron_left</span>
       </button>
-      <button onclick="stepNextAuto()" class="p-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-brandMuted hover:text-white transition-all">
-        <span class="material-symbols-outlined text-sm">chevron_right</span>
+      <button onclick="stepNextAuto()" title="Next Step" class="p-2 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/25 text-indigo-300 hover:text-white border border-indigo-500/30 transition-all flex items-center justify-center shadow-sm">
+        <span class="material-symbols-outlined text-base">chevron_right</span>
       </button>
     </div>
   </div>
@@ -874,6 +1932,10 @@
         <stop offset="0%" stop-color="#4facfe" stop-opacity="0.15"></stop>
         <stop offset="100%" stop-color="#4facfe" stop-opacity="0.0"></stop>
       </lineargradient>
+      <linearGradient id="cyanAreaLight" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#2563eb" stop-opacity="0.18"></stop>
+        <stop offset="100%" stop-color="#2563eb" stop-opacity="0.0"></stop>
+      </linearGradient>
     </defs>
     <!-- Gridlines & Y Axis Ticks (Always clean & visible) -->
     <line stroke="rgba(255,255,255,0.06)" stroke-dasharray="2,2" x1="35" x2="445" y1="20" y2="20"></line>
@@ -902,18 +1964,18 @@
       <!-- Accuracy Line (#4facfe, strokeWidth 2.5) -->
       <path class="chart-line" d="M 45 113 Q 120 78 200 60 T 430 43" fill="none" id="curve-acc" stroke="#4facfe" stroke-linecap="round" stroke-width="2.5"></path>
       <!-- Key Data Markers & Floating Value Labels -->
-      <circle cx="45" cy="113" fill="#0d1117" r="3.5" stroke="#4facfe" stroke-width="2"></circle>
-      <text fill="#4facfe" font-size="9" text-anchor="middle" x="45" y="130">71.3%</text>
-      <circle cx="195" cy="62" fill="#0d1117" r="3.5" stroke="#4facfe" stroke-width="2"></circle>
-      <text fill="#4facfe" font-size="9" text-anchor="middle" x="195" y="52">78.9%</text>
-      <circle cx="280" cy="54" fill="#4facfe" r="5" stroke="#ffffff" stroke-width="2"></circle>
+      <circle id="acc-marker-1" cx="45" cy="113" fill="#0d1117" r="3.5" stroke="#4facfe" stroke-width="2"></circle>
+      <text id="acc-text-1" fill="#4facfe" font-size="9" text-anchor="middle" x="45" y="130">71.3%</text>
+      <circle id="acc-marker-2" cx="195" cy="62" fill="#0d1117" r="3.5" stroke="#4facfe" stroke-width="2"></circle>
+      <text id="acc-text-2" fill="#4facfe" font-size="9" text-anchor="middle" x="195" y="52">78.9%</text>
+      <circle id="acc-marker-3" cx="280" cy="54" fill="#4facfe" r="5" stroke="#ffffff" stroke-width="2"></circle>
       <!-- Floating Sweet Spot Pill -->
       <g id="acc-opt-pill" transform="translate(280, 26)">
         <rect fill="#161b22" height="18" rx="4" stroke="#4facfe" stroke-width="1" width="70" x="-35" y="-10"></rect>
         <text id="acc-opt-text" fill="#4facfe" font-size="9" font-weight="bold" text-anchor="middle" x="0" y="3">82.4% (Opt)</text>
       </g>
-      <circle cx="430" cy="43" fill="#0d1117" r="3.5" stroke="#4facfe" stroke-width="2"></circle>
-      <text fill="#4facfe" font-size="9" text-anchor="end" x="425" y="58">84.8%</text>
+      <circle id="acc-marker-4" cx="430" cy="43" fill="#0d1117" r="3.5" stroke="#4facfe" stroke-width="2"></circle>
+      <text id="acc-text-4" fill="#4facfe" font-size="9" text-anchor="end" x="425" y="58">84.8%</text>
     </g>
 
     <!-- Interactive Real-Time Operating Indicator (Hidden initially) -->
@@ -1120,13 +2182,13 @@
     </div>
 
     <!-- Tab Switcher -->
-    <div class="flex items-center gap-1.5 p-1 bg-black/40 border border-white/[0.08] rounded-xl self-start md:self-auto">
-      <button id="tab-btn-empirical" onclick="switchBenchmarkTab('empirical')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brandPrimary text-white shadow-md transition-all flex items-center gap-1.5">
-        <span class="material-symbols-outlined text-[15px]">table_chart</span>
+    <div class="flex items-center gap-1.5 p-1.5 bg-[#0d121c] border border-indigo-500/30 rounded-xl self-start md:self-auto shadow-inner bench-tab-container">
+      <button id="tab-btn-empirical" onclick="switchBenchmarkTab('empirical')" class="px-4 py-2 rounded-lg text-xs font-semibold bg-gradient-to-r from-indigo-600 to-blue-600 text-white shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2">
+        <span class="material-symbols-outlined text-[16px]">table_chart</span>
         <span>Empirical Benchmarks (Acc &amp; F1)</span>
       </button>
-      <button id="tab-btn-distributed" onclick="switchBenchmarkTab('distributed')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-brandMuted hover:text-white transition-all flex items-center gap-1.5">
-        <span class="material-symbols-outlined text-[15px]">account_tree</span>
+      <button id="tab-btn-distributed" onclick="switchBenchmarkTab('distributed')" class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/[0.05] transition-all flex items-center gap-2">
+        <span class="material-symbols-outlined text-[16px]">account_tree</span>
         <span>Table I: Distributed Frameworks</span>
       </button>
     </div>
@@ -1136,23 +2198,23 @@
   <div id="tab-pane-empirical" class="flex flex-col gap-4">
     <div class="flex items-center justify-between flex-wrap gap-2">
       <div class="flex items-center gap-2">
-        <span class="text-xs text-brandMuted font-mono" id="table-dataset-name">Dataset: Adult 1994</span>
-        <span class="text-[11px] text-brandMuted">•</span>
-        <span class="text-[11px] text-brandMuted font-mono">Includes <strong class="text-white font-semibold">F1-Score</strong> to evaluate minority class trade-offs under DP noise</span>
+        <span class="text-xs text-indigo-300 font-mono font-semibold" id="table-dataset-name">Dataset: Adult 1994</span>
+        <span class="text-[11px] text-slate-500">•</span>
+        <span class="text-[11px] text-slate-300 font-mono">Includes <strong class="text-white font-semibold">F1-Score</strong> to evaluate minority class trade-offs under DP noise</span>
       </div>
-      <div class="flex items-center gap-2">
-        <span class="text-xs text-brandMuted font-medium mr-1">Filter:</span>
-        <button onclick="filterBenchmarkRows('all', this)" class="bench-filter-btn px-2.5 py-1 rounded-md bg-white/[0.1] text-white text-xs font-medium">All</button>
-        <button onclick="filterBenchmarkRows('safe', this)" class="bench-filter-btn px-2.5 py-1 rounded-md bg-white/[0.04] text-brandMuted hover:text-white text-xs font-medium">Safe (ε≤1.0)</button>
-        <button onclick="filterBenchmarkRows('rec', this)" class="bench-filter-btn px-2.5 py-1 rounded-md bg-white/[0.04] text-brandMuted hover:text-white text-xs font-medium">Optimal (ε=5.0)</button>
-        <button onclick="filterBenchmarkRows('base', this)" class="bench-filter-btn px-2.5 py-1 rounded-md bg-white/[0.04] text-brandMuted hover:text-white text-xs font-medium">Baseline</button>
+      <div class="bench-filter-container flex items-center gap-1.5 p-1 bg-black/40 border border-white/[0.08] rounded-xl">
+        <span class="text-xs text-slate-400 font-semibold px-2 font-mono">Filter:</span>
+        <button onclick="filterBenchmarkRows('all', this)" class="bench-filter-btn px-3 py-1 rounded-lg bg-indigo-600 text-white text-xs font-semibold shadow-md transition-all">All</button>
+        <button onclick="filterBenchmarkRows('safe', this)" class="bench-filter-btn px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 text-xs font-medium transition-all">Safe (ε≤1.0)</button>
+        <button onclick="filterBenchmarkRows('rec', this)" class="bench-filter-btn px-3 py-1 rounded-lg bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500/20 text-xs font-medium transition-all">Optimal (ε=5.0)</button>
+        <button onclick="filterBenchmarkRows('base', this)" class="bench-filter-btn px-3 py-1 rounded-lg bg-rose-500/10 text-rose-400 border border-rose-500/20 hover:bg-rose-500/20 text-xs font-medium transition-all">Baseline</button>
       </div>
     </div>
 
-    <div class="overflow-x-auto rounded-lg border border-white/[0.06]">
+    <div class="overflow-x-auto rounded-xl border border-indigo-500/20 bg-gradient-to-b from-[#111622] to-[#0c0f17] shadow-lg">
       <table class="w-full text-left text-xs font-sans">
         <thead>
-          <tr class="bg-black/30 border-b border-white/[0.07] text-[11px] uppercase tracking-wider text-brandMuted font-semibold">
+          <tr class="bg-gradient-to-r from-indigo-950/70 via-[#161b26] to-purple-950/70 border-b border-indigo-500/30 text-[11px] uppercase tracking-wider text-indigo-200 font-semibold">
             <th class="py-3 px-3">Model</th>
             <th class="py-3 px-3">Mechanism</th>
             <th class="py-3 px-3">Epsilon (ε)</th>
@@ -1163,17 +2225,17 @@
             <th class="py-3 px-3 text-right">Training Time</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-white/[0.04] font-mono text-[12px]" id="benchmarks-tbody">
+        <tbody class="divide-y divide-white/[0.08] font-mono text-[12px]" id="benchmarks-tbody">
           <!-- Row 1: ε=0.5 -->
-          <tr class="hover:bg-white/[0.02] transition-colors">
+          <tr class="hover:bg-white/[0.04] transition-colors">
             <td class="py-3 px-3 font-sans font-medium text-white">DP-SGD ResNet-Tabular</td>
-            <td class="py-3 px-3 text-brandMuted font-sans">Gaussian + Clip</td>
+            <td class="py-3 px-3 text-slate-300 font-sans">Gaussian + Clip</td>
             <td class="py-3 px-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                 ε = 0.50
               </span>
             </td>
-            <td class="py-3 px-3 text-brandMuted">1.0e-5</td>
+            <td class="py-3 px-3 text-slate-300">1.0e-5</td>
             <td class="py-3 px-3 text-white font-medium">71.3%</td>
             <td class="py-3 px-3 text-[#4facfe] font-mono font-semibold">49.0%</td>
             <td class="py-3 px-3">
@@ -1182,18 +2244,18 @@
                 <span>51.2% Negligible</span>
               </div>
             </td>
-            <td class="py-3 px-3 text-right text-brandMuted">4m 12s</td>
+            <td class="py-3 px-3 text-right text-slate-300">4m 12s</td>
           </tr>
           <!-- Row 2: ε=1.0 -->
-          <tr class="hover:bg-white/[0.02] transition-colors">
+          <tr class="hover:bg-white/[0.04] transition-colors">
             <td class="py-3 px-3 font-sans font-medium text-white">DP-SGD MLP</td>
-            <td class="py-3 px-3 text-brandMuted font-sans">Gaussian + Clip</td>
+            <td class="py-3 px-3 text-slate-300 font-sans">Gaussian + Clip</td>
             <td class="py-3 px-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                 ε = 1.00
               </span>
             </td>
-            <td class="py-3 px-3 text-brandMuted">1.0e-5</td>
+            <td class="py-3 px-3 text-slate-300">1.0e-5</td>
             <td class="py-3 px-3 text-white font-medium">74.6%</td>
             <td class="py-3 px-3 text-[#4facfe] font-mono font-semibold">54.2%</td>
             <td class="py-3 px-3">
@@ -1202,21 +2264,21 @@
                 <span>52.0% Safe</span>
               </div>
             </td>
-            <td class="py-3 px-3 text-right text-brandMuted">3m 48s</td>
+            <td class="py-3 px-3 text-right text-slate-300">3m 48s</td>
           </tr>
           <!-- Row 3: ε=5.0 (Recommended) -->
-          <tr class="bg-white/[0.03] hover:bg-white/[0.05] transition-colors border-l-2 border-brandPrimary">
+          <tr class="bg-indigo-500/10 hover:bg-indigo-500/15 transition-colors border-l-2 border-indigo-400">
             <td class="py-3 px-3 font-sans font-medium text-white flex items-center gap-1.5">
               <span>DP-SGD Optimal</span>
-              <span class="text-[10px] font-sans font-semibold text-brandPrimary bg-brandPrimary/10 px-1.5 py-0.2 rounded">Recommended</span>
+              <span class="text-[10px] font-sans font-semibold text-indigo-300 bg-indigo-500/20 border border-indigo-500/30 px-1.5 py-0.2 rounded">Recommended</span>
             </td>
-            <td class="py-3 px-3 text-brandMuted font-sans">Gaussian + Clip</td>
+            <td class="py-3 px-3 text-slate-300 font-sans">Gaussian + Clip</td>
             <td class="py-3 px-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/30">
                 ε = 5.00
               </span>
             </td>
-            <td class="py-3 px-3 text-brandMuted">1.0e-5</td>
+            <td class="py-3 px-3 text-slate-300">1.0e-5</td>
             <td class="py-3 px-3 text-white font-medium">82.4%</td>
             <td class="py-3 px-3 text-[#4facfe] font-mono font-semibold">63.8%</td>
             <td class="py-3 px-3">
@@ -1225,18 +2287,18 @@
                 <span>55.4% Controlled</span>
               </div>
             </td>
-            <td class="py-3 px-3 text-right text-brandMuted">3m 50s</td>
+            <td class="py-3 px-3 text-right text-slate-300">3m 50s</td>
           </tr>
           <!-- Row 4: ε=8.0 -->
-          <tr class="hover:bg-white/[0.02] transition-colors">
+          <tr class="hover:bg-white/[0.04] transition-colors">
             <td class="py-3 px-3 font-sans font-medium text-white">DP LightGBM-DP</td>
-            <td class="py-3 px-3 text-brandMuted font-sans">Laplace Trees</td>
+            <td class="py-3 px-3 text-slate-300 font-sans">Laplace Trees</td>
             <td class="py-3 px-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-500/15 text-rose-300 border border-rose-500/30">
                 ε = 8.00
               </span>
             </td>
-            <td class="py-3 px-3 text-brandMuted">0 (Pure)</td>
+            <td class="py-3 px-3 text-slate-300">0 (Pure)</td>
             <td class="py-3 px-3 text-white font-medium">84.1%</td>
             <td class="py-3 px-3 text-[#4facfe] font-mono font-semibold">65.5%</td>
             <td class="py-3 px-3">
@@ -1245,18 +2307,18 @@
                 <span>66.2% Elevated</span>
               </div>
             </td>
-            <td class="py-3 px-3 text-right text-brandMuted">1m 20s</td>
+            <td class="py-3 px-3 text-right text-slate-300">1m 20s</td>
           </tr>
           <!-- Row 5: Baseline -->
-          <tr class="hover:bg-white/[0.02] transition-colors">
+          <tr class="hover:bg-white/[0.04] transition-colors">
             <td class="py-3 px-3 font-sans font-medium text-white">Standard SGD Baseline</td>
-            <td class="py-3 px-3 text-brandMuted font-sans">None (Unbounded)</td>
+            <td class="py-3 px-3 text-slate-300 font-sans">None (Unbounded)</td>
             <td class="py-3 px-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-500/15 text-rose-300 border border-rose-500/30">
                 ε = ∞ (None)
               </span>
             </td>
-            <td class="py-3 px-3 text-brandMuted">0</td>
+            <td class="py-3 px-3 text-slate-300">0</td>
             <td class="py-3 px-3 text-white font-medium">86.2%</td>
             <td class="py-3 px-3 text-[#4facfe] font-mono font-semibold">69.4%</td>
             <td class="py-3 px-3">
@@ -1265,7 +2327,7 @@
                 <span>79.8% Critical</span>
               </div>
             </td>
-            <td class="py-3 px-3 text-right text-brandMuted">1m 05s</td>
+            <td class="py-3 px-3 text-right text-slate-300">1m 05s</td>
           </tr>
         </tbody>
       </table>
@@ -1273,11 +2335,11 @@
 
     <!-- Bottom Action CTA -->
     <div class="flex items-center justify-between pt-2 border-t border-white/[0.06] flex-wrap gap-3">
-      <div class="text-xs text-brandMuted flex items-center gap-1.5">
+      <div class="text-xs text-slate-300 flex items-center gap-1.5">
         <span class="material-symbols-outlined text-sm text-brandSafe">verified</span>
         <span>DP-SGD with moments accountant delivers certified differential privacy with minimal minority-class degradation.</span>
       </div>
-      <button onclick="downloadCSVReport()" class="px-3.5 py-1.5 rounded-lg border border-white/[0.12] text-xs font-medium text-brandText hover:border-brandSafe hover:text-brandSafe hover:bg-brandSafe/5 transition-all flex items-center gap-1.5">
+      <button onclick="downloadCSVReport()" class="px-3.5 py-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 hover:text-white transition-all flex items-center gap-1.5 shadow-sm">
         <span class="material-symbols-outlined text-xs">download</span>
         <span>Download CSV Report</span>
       </button>
@@ -1300,10 +2362,10 @@
     </div>
 
     <!-- Table I Container with Horizontal Scroll -->
-    <div class="overflow-x-auto rounded-lg border border-white/[0.08] bg-black/20">
+    <div class="overflow-x-auto rounded-xl border border-indigo-500/25 bg-gradient-to-b from-[#111622] to-[#0c0f17] shadow-xl">
       <table class="w-full text-left text-xs font-sans min-w-[860px]">
         <thead>
-          <tr class="bg-black/40 border-b border-white/[0.07] text-[11px] uppercase tracking-wider text-brandMuted font-semibold">
+          <tr class="bg-gradient-to-r from-indigo-950/70 via-[#161b26] to-purple-950/70 border-b border-indigo-500/30 text-[11px] uppercase tracking-wider text-indigo-200 font-semibold">
             <th class="py-3.5 px-3">Framework / Study</th>
             <th class="py-3.5 px-3">Privacy Mechanism</th>
             <th class="py-3.5 px-3">Privacy Accounting</th>
@@ -1312,182 +2374,182 @@
             <th class="py-3.5 px-3 text-right">Compute &amp; Network Overhead</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-white/[0.04] text-[12px]">
+        <tbody class="divide-y divide-white/[0.08] text-[12px]">
           <!-- Row 1: Centralized DP-SGD (This work) -->
-          <tr class="bg-brandPrimary/[0.06] hover:bg-brandPrimary/[0.1] transition-colors border-l-2 border-brandPrimary">
+          <tr class="bg-indigo-500/[0.08] hover:bg-indigo-500/[0.14] transition-colors border-l-2 border-indigo-400">
             <td class="py-3.5 px-3 font-medium text-white">
               <div class="flex items-center gap-1.5">
                 <span class="font-bold text-white text-sm">Centralized DP-SGD</span>
-                <span class="px-1.5 py-0.2 rounded text-[9px] font-mono bg-brandPrimary/20 text-brandPrimary border border-brandPrimary/30 font-semibold">THIS WORK</span>
+                <span class="px-1.5 py-0.2 rounded text-[9px] font-mono bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-semibold">THIS WORK</span>
               </div>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">Centralized Machine Learning</div>
+              <div class="text-[11px] text-indigo-200/80 font-mono mt-0.5">Centralized Machine Learning</div>
             </td>
             <td class="py-3.5 px-3">
               <span class="font-medium text-white">Gaussian Noise + Gradient Clip</span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">σ ≈ 1.18 - 4.84, C = 1.0</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">σ ≈ 1.18 - 4.84, C = 1.0</div>
             </td>
             <td class="py-3.5 px-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">
                 Moments Accountant / RDP
               </span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">(ε = 0.5 - 10.0, δ = 10⁻⁵)</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">(ε = 0.5 - 10.0, δ = 10⁻⁵)</div>
             </td>
-            <td class="py-3.5 px-3 text-brandText">
+            <td class="py-3.5 px-3 text-slate-200">
               <span class="font-medium text-white">Single Trusted Curator</span>
-              <div class="text-[11px] text-brandMuted mt-0.5">Untrusted analysts / external MIA attackers</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Untrusted analysts / external MIA attackers</div>
             </td>
             <td class="py-3.5 px-3 text-amber-400">
               <div class="flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
                 <span class="font-medium">Implicit (Norm Bound C=1.0)</span>
               </div>
-              <div class="text-[11px] text-brandMuted mt-0.5">Poisoning not directly mitigated</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Poisoning not directly mitigated</div>
             </td>
             <td class="py-3.5 px-3 text-right">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                 Low (~1.2 - 1.8× Compute)
               </span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">Single-node; 0 network overhead</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Single-node; 0 network overhead</div>
             </td>
           </tr>
 
           <!-- Row 2: PRECAD -->
-          <tr class="hover:bg-white/[0.02] transition-colors">
+          <tr class="hover:bg-white/[0.04] transition-colors">
             <td class="py-3.5 px-3 font-medium text-white">
               <div class="font-semibold text-white">PRECAD</div>
-              <div class="text-[11px] text-brandMuted mt-0.5">Gu et al. (2023) [36]</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Gu et al. (2023) [36]</div>
             </td>
             <td class="py-3.5 px-3">
-              <span class="text-brandText">2-out-of-2 MPC + Gaussian DP</span>
-              <div class="text-[11px] text-brandMuted mt-0.5">Additive secret sharing + server DP noise</div>
+              <span class="text-slate-100">2-out-of-2 MPC + Gaussian DP</span>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Additive secret sharing + server DP noise</div>
             </td>
             <td class="py-3.5 px-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.06] text-white border border-white/[0.1]">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
                 Rényi DP (RDP)
               </span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">Moments accountant tracking</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Moments accountant tracking</div>
             </td>
-            <td class="py-3.5 px-3 text-brandText">
+            <td class="py-3.5 px-3 text-slate-200">
               <span class="font-medium text-white">2 Non-Colluding Servers</span>
-              <div class="text-[11px] text-brandMuted mt-0.5">Honest-but-curious servers + untrusted clients</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Honest-but-curious servers + untrusted clients</div>
             </td>
             <td class="py-3.5 px-3 text-emerald-400">
               <div class="flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                 <span class="font-medium">Enhanced (MPC Norm Verification)</span>
               </div>
-              <div class="text-[11px] text-brandMuted mt-0.5">Verified client clipping norm C in MPC</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Verified client clipping norm C in MPC</div>
             </td>
             <td class="py-3.5 px-3 text-right">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/30">
                 Moderate (~7× Compute)
               </span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">Local DP compute + MPC communication</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Local DP compute + MPC communication</div>
             </td>
           </tr>
 
           <!-- Row 3: FLiPD -->
-          <tr class="hover:bg-white/[0.02] transition-colors">
+          <tr class="hover:bg-white/[0.04] transition-colors">
             <td class="py-3.5 px-3 font-medium text-white">
               <div class="font-semibold text-white">FLiPD</div>
-              <div class="text-[11px] text-brandMuted mt-0.5">Chandran et al. (2024) [38]</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Chandran et al. (2024) [38]</div>
             </td>
             <td class="py-3.5 px-3">
-              <span class="text-brandText">Distributed Laplace DP + HD Filter</span>
-              <div class="text-[11px] text-brandMuted mt-0.5">Oblivious Hamming distance outlier filtering</div>
+              <span class="text-slate-100">Distributed Laplace DP + HD Filter</span>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Oblivious Hamming distance outlier filtering</div>
             </td>
             <td class="py-3.5 px-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.06] text-white border border-white/[0.1]">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
                 Pure / Approx DP
               </span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">Distributed noise composition</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Distributed noise composition</div>
             </td>
-            <td class="py-3.5 px-3 text-brandText">
+            <td class="py-3.5 px-3 text-slate-200">
               <span class="font-medium text-white">2 MPC Servers, ≥1 Honest Client</span>
-              <div class="text-[11px] text-brandMuted mt-0.5">Tolerates minority Byzantine clients</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Tolerates minority Byzantine clients</div>
             </td>
             <td class="py-3.5 px-3 text-emerald-400">
               <div class="flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                 <span class="font-medium">Strong (Oblivious HD Filter)</span>
               </div>
-              <div class="text-[11px] text-brandMuted mt-0.5">No trusted pre-trained base model required</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">No trusted pre-trained base model required</div>
             </td>
             <td class="py-3.5 px-3 text-right">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-blue-500/15 text-blue-300 border border-blue-500/30">
                 Low-to-Moderate
               </span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">63.5% MPC comm shifted to offline prep</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">63.5% MPC comm shifted to offline prep</div>
             </td>
           </tr>
 
           <!-- Row 4: FedAvg_DP -->
-          <tr class="hover:bg-white/[0.02] transition-colors">
+          <tr class="hover:bg-white/[0.04] transition-colors">
             <td class="py-3.5 px-3 font-medium text-white">
               <div class="font-semibold text-white">FedAvg_DP</div>
-              <div class="text-[11px] text-brandMuted mt-0.5">Sharma et al. (2023) [37]</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Sharma et al. (2023) [37]</div>
             </td>
             <td class="py-3.5 px-3">
-              <span class="text-brandText">Local Laplace DP / SVT</span>
-              <div class="text-[11px] text-brandMuted mt-0.5">Per-client perturbation before transmission</div>
+              <span class="text-slate-100">Local Laplace DP / SVT</span>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Per-client perturbation before transmission</div>
             </td>
             <td class="py-3.5 px-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.06] text-white border border-white/[0.1]">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-purple-500/10 text-purple-300 border border-purple-500/20">
                 Advanced Comp / SVT
               </span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">Local DP privacy budget tracking</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Local DP privacy budget tracking</div>
             </td>
-            <td class="py-3.5 px-3 text-brandText">
+            <td class="py-3.5 px-3 text-slate-200">
               <span class="font-medium text-white">Honest-but-Curious Orchestrator</span>
-              <div class="text-[11px] text-brandMuted mt-0.5">Tested across 4 Swedish county hospitals</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Tested across 4 Swedish county hospitals</div>
             </td>
             <td class="py-3.5 px-3 text-rose-400">
               <div class="flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
                 <span class="font-medium">Vulnerable</span>
               </div>
-              <div class="text-[11px] text-brandMuted mt-0.5">Susceptible to poisoned client updates</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Susceptible to poisoned client updates</div>
             </td>
             <td class="py-3.5 px-3 text-right">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-rose-500/15 text-rose-300 border border-rose-500/30">
                 Low Compute / High Acc Drop
               </span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">Severe utility degradation on small cohorts</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Severe utility degradation on small cohorts</div>
             </td>
           </tr>
 
           <!-- Row 5: FedAvg_HE -->
-          <tr class="hover:bg-white/[0.02] transition-colors">
+          <tr class="hover:bg-white/[0.04] transition-colors">
             <td class="py-3.5 px-3 font-medium text-white">
               <div class="font-semibold text-white">FedAvg_HE</div>
-              <div class="text-[11px] text-brandMuted mt-0.5">Sharma et al. (2023) [37]</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Sharma et al. (2023) [37]</div>
             </td>
             <td class="py-3.5 px-3">
-              <span class="text-brandText">CKKS Homomorphic Encryption</span>
-              <div class="text-[11px] text-brandMuted mt-0.5">Additive aggregation over ciphertexts</div>
+              <span class="text-slate-100">CKKS Homomorphic Encryption</span>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Additive aggregation over ciphertexts</div>
             </td>
             <td class="py-3.5 px-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-purple-500/10 text-purple-400 border border-purple-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-purple-500/15 text-purple-300 border border-purple-500/30">
                 RLWE Hardness (Cryptographic)
               </span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">Zero statistical utility loss</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">Zero statistical utility loss</div>
             </td>
-            <td class="py-3.5 px-3 text-brandText">
+            <td class="py-3.5 px-3 text-slate-200">
               <span class="font-medium text-white">Honest-but-Curious Server</span>
-              <div class="text-[11px] text-brandMuted mt-0.5">Aggregates without decrypting weights</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Aggregates without decrypting weights</div>
             </td>
             <td class="py-3.5 px-3 text-rose-400">
               <div class="flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
                 <span class="font-medium">Extremely Limited</span>
               </div>
-              <div class="text-[11px] text-brandMuted mt-0.5">Ciphertext prevents aggregator inspection (needs ZKPs)</div>
+              <div class="text-[11px] text-slate-300 mt-0.5">Ciphertext prevents aggregator inspection (needs ZKPs)</div>
             </td>
             <td class="py-3.5 px-3 text-right">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-rose-500/15 text-rose-300 border border-rose-500/30">
                 High Overhead (~1.69× / 17.7h)
               </span>
-              <div class="text-[11px] text-brandMuted font-mono mt-0.5">63,700s vs 37,800s; MB-scale ciphertexts</div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">63,700s vs 37,800s; MB-scale ciphertexts</div>
             </td>
           </tr>
         </tbody>
@@ -1497,49 +2559,49 @@
     <!-- 3 Real-World Architectural Deep Dive Cards (Section V-C Findings) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
       <!-- Card 1 -->
-      <div class="p-4 rounded-xl bg-black/25 border border-white/[0.06] flex flex-col justify-between gap-2.5">
+      <div class="arch-dive-card arch-card-1 p-4 rounded-xl bg-gradient-to-br from-indigo-950/40 via-[#121622] to-emerald-950/30 border border-emerald-500/30 shadow-md flex flex-col justify-between gap-2.5">
         <div>
           <div class="flex items-center gap-2">
             <span class="text-base">🏥</span>
-            <span class="text-xs font-semibold text-white uppercase tracking-wider font-mono">Centralized vs Cross-Silo Trust</span>
+            <span class="text-xs font-bold text-white uppercase tracking-wider font-mono">Centralized vs Cross-Silo Trust</span>
           </div>
-          <p class="text-xs text-brandMuted mt-2 leading-relaxed">
-            <strong class="text-white">Centralized DP-SGD</strong> achieves optimal utility (<span class="text-brandSafe font-mono">ΔAcc ≤ 2.9%</span>, <span class="text-brandSafe font-mono">1.5× compute</span>) when data is legally poolable in a single administrative enclave. In cross-silo settings where data sharing is prohibited by GDPR/HIPAA, distributed MPC frameworks (<strong class="text-white">PRECAD, FLiPD</strong>) become essential despite network overhead.
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            <strong class="text-emerald-400">Centralized DP-SGD</strong> achieves optimal utility (<span class="text-emerald-400 font-mono font-semibold">ΔAcc ≤ 2.9%</span>, <span class="text-emerald-400 font-mono font-semibold">1.5× compute</span>) when data is legally poolable in a single administrative enclave. In cross-silo settings where data sharing is prohibited by GDPR/HIPAA, distributed MPC frameworks (<strong class="text-white font-semibold">PRECAD, FLiPD</strong>) become essential despite network overhead.
           </p>
         </div>
-        <div class="text-[10px] text-brandSafe font-mono border-t border-white/[0.05] pt-2">
+        <div class="text-[10px] text-emerald-400 font-mono border-t border-emerald-500/20 pt-2 font-semibold">
           ✓ Optimal for Single-Host Hospital / FinTech Enclaves
         </div>
       </div>
 
       <!-- Card 2 -->
-      <div class="p-4 rounded-xl bg-black/25 border border-white/[0.06] flex flex-col justify-between gap-2.5">
+      <div class="arch-dive-card arch-card-2 p-4 rounded-xl bg-gradient-to-br from-amber-950/40 via-[#121622] to-orange-950/30 border border-amber-500/30 shadow-md flex flex-col justify-between gap-2.5">
         <div>
           <div class="flex items-center gap-2">
             <span class="text-base">⚡</span>
-            <span class="text-xs font-semibold text-white uppercase tracking-wider font-mono">The Homomorphic Encryption Reality</span>
+            <span class="text-xs font-bold text-white uppercase tracking-wider font-mono">The Homomorphic Encryption Reality</span>
           </div>
-          <p class="text-xs text-brandMuted mt-2 leading-relaxed">
-            <strong class="text-white">CKKS Homomorphic Encryption (FedAvg_HE)</strong> avoids accuracy loss entirely, but incurs a <strong class="text-rose-400">17.7-hour training latency</strong> (63,700s vs 37,800s plaintext over 250 rounds on Swedish hospitals) and multi-megabyte ciphertext inflation per client update, making it impractical without specialized hardware acceleration.
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            <strong class="text-amber-300">CKKS Homomorphic Encryption (FedAvg_HE)</strong> avoids accuracy loss entirely, but incurs a <strong class="text-rose-400 font-semibold">17.7-hour training latency</strong> (63,700s vs 37,800s plaintext over 250 rounds on Swedish hospitals) and multi-megabyte ciphertext inflation per client update, making it impractical without specialized hardware acceleration.
           </p>
         </div>
-        <div class="text-[10px] text-amber-400 font-mono border-t border-white/[0.05] pt-2">
+        <div class="text-[10px] text-amber-400 font-mono border-t border-amber-500/20 pt-2 font-semibold">
           ⚠️ Extreme Latency &amp; Bandwidth Trade-off
         </div>
       </div>
 
       <!-- Card 3 -->
-      <div class="p-4 rounded-xl bg-black/25 border border-white/[0.06] flex flex-col justify-between gap-2.5">
+      <div class="arch-dive-card arch-card-3 p-4 rounded-xl bg-gradient-to-br from-purple-950/40 via-[#121622] to-blue-950/30 border border-purple-500/30 shadow-md flex flex-col justify-between gap-2.5">
         <div>
           <div class="flex items-center gap-2">
             <span class="text-base">🛡️</span>
-            <span class="text-xs font-semibold text-white uppercase tracking-wider font-mono">Byzantine Poisoning vs DP Noise</span>
+            <span class="text-xs font-bold text-white uppercase tracking-wider font-mono">Byzantine Poisoning vs DP Noise</span>
           </div>
-          <p class="text-xs text-brandMuted mt-2 leading-relaxed">
-            Differential privacy protects <strong class="text-white">sample membership</strong>, not <strong class="text-white">model integrity</strong>. Adversaries can inject backdoors while satisfying DP bounds. Frameworks like <strong class="text-white">FLiPD</strong> deploy oblivious Hamming-distance filtering to reject malicious model updates without requiring a trusted base model or plaintext disclosure.
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Differential privacy protects <strong class="text-purple-300">sample membership</strong>, not <strong class="text-white font-semibold">model integrity</strong>. Adversaries can inject backdoors while satisfying DP bounds. Frameworks like <strong class="text-cyan-300 font-semibold">FLiPD</strong> deploy oblivious Hamming-distance filtering to reject malicious model updates without requiring a trusted base model or plaintext disclosure.
           </p>
         </div>
-        <div class="text-[10px] text-[#4facfe] font-mono border-t border-white/[0.05] pt-2">
+        <div class="text-[10px] text-cyan-400 font-mono border-t border-purple-500/20 pt-2 font-semibold">
           🔒 Certified Privacy ≠ Poisoning Immunity
         </div>
       </div>
@@ -1614,7 +2676,61 @@
 <!-- GSAP ANIMATIONS & INTERACTIVE SCRIPTS -->
 <!-- ========================================================================= -->
 <script>
+    // =========================================================================
+    // THEME CONTROLLER (Dark / Bright Mode)
+    // =========================================================================
+    function applyTheme(isDark) {
+      const html = document.documentElement;
+      const icon = document.getElementById("theme-icon");
+      const text = document.getElementById("theme-text");
+      const logoDark = document.getElementById("app-logo-dark");
+      const logoLight = document.getElementById("app-logo-light");
+      const favicon = document.querySelector("link[rel='icon']");
+
+      if (isDark) {
+        html.classList.add("dark");
+        if (icon) {
+          icon.innerText = "light_mode";
+          icon.className = "material-symbols-outlined text-[17px] transition-transform duration-300 group-hover:rotate-45 text-amber-400";
+        }
+        if (text) text.innerText = "Bright Mode";
+        if (logoDark) logoDark.classList.remove("hidden");
+        if (logoLight) logoLight.classList.add("hidden");
+        if (favicon) favicon.setAttribute("href", "epsilon_logo.svg");
+        localStorage.setItem("epsilon_theme", "dark");
+      } else {
+        html.classList.remove("dark");
+        if (icon) {
+          icon.innerText = "dark_mode";
+          icon.className = "material-symbols-outlined text-[17px] transition-transform duration-300 group-hover:-rotate-45 text-indigo-600";
+        }
+        if (text) text.innerText = "Dark Mode";
+        if (logoDark) logoDark.classList.add("hidden");
+        if (logoLight) logoLight.classList.remove("hidden");
+        if (favicon) favicon.setAttribute("href", "epsilon_logo_light.svg");
+        localStorage.setItem("epsilon_theme", "light");
+      }
+    }
+
+    function toggleTheme() {
+      const isCurrentlyDark = document.documentElement.classList.contains("dark");
+      applyTheme(!isCurrentlyDark);
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem("epsilon_theme");
+      if (savedTheme) {
+        applyTheme(savedTheme === "dark");
+      } else {
+        applyTheme(true);
+      }
+    }
+
+    // Call initTheme immediately
+    initTheme();
+
     document.addEventListener("DOMContentLoaded", () => {
+      initTheme();
       // Register ScrollTrigger
       gsap.registerPlugin(ScrollTrigger);
       ScrollTrigger.defaults({
@@ -1887,26 +3003,34 @@
         }
       }
 
-      // 6. Auto Demo highlights reset
-      clearTourHighlights();
+    // 6. Auto Demo highlights reset
+    clearTourHighlights();
+  }
+
+  window.resetAllTelemetryToFresh = resetAllTelemetryToFresh;
+
+  function getActiveDatasetKey() {
+    if (typeof currentSource !== 'undefined' && currentSource === 'upload' && typeof DATASETS !== 'undefined' && DATASETS['uploaded']) {
+      return 'uploaded';
     }
+    const sel = document.getElementById("dataset-select");
+    return sel ? sel.value : 'adult';
+  }
+  window.getActiveDatasetKey = getActiveDatasetKey;
 
-    window.resetAllTelemetryToFresh = resetAllTelemetryToFresh;
+  // =========================================================================
+  // REAL-TIME REACTIVE TELEMETRY & EMPIRICAL CURVES
+  // Dynamically updates Chart A, Chart B, Chart C, Audit Header & Summary Card
+  // =========================================================================
+  function updateLiveTelemetryVisuals() {
+    const epsSlider = document.getElementById("epsilon-slider");
+    const epochsSlider = document.getElementById("epochs-slider");
+    const batchSelect = document.getElementById("batch-select");
 
-    // =========================================================================
-    // REAL-TIME REACTIVE TELEMETRY & EMPIRICAL CURVES
-    // Dynamically updates Chart A, Chart B, Chart C, Audit Header & Summary Card
-    // =========================================================================
-    function updateLiveTelemetryVisuals() {
-      const epsSlider = document.getElementById("epsilon-slider");
-      const epochsSlider = document.getElementById("epochs-slider");
-      const batchSelect = document.getElementById("batch-select");
-      const datasetSelect = document.getElementById("dataset-select");
-
-      const eps = parseFloat(epsSlider ? epsSlider.value : "1.0") || 1.0;
-      const epochs = parseInt(epochsSlider ? epochsSlider.value : "15") || 15;
-      const batchVal = batchSelect ? batchSelect.value : "64";
-      const currentDs = datasetSelect ? datasetSelect.value : "adult";
+    const eps = parseFloat(epsSlider ? epsSlider.value : "1.0") || 1.0;
+    const epochs = parseInt(epochsSlider ? epochsSlider.value : "15") || 15;
+    const batchVal = batchSelect ? batchSelect.value : "64";
+    const currentDs = getActiveDatasetKey();
 
       // Update slider numerical readout badges
       const epsNum = document.getElementById("epsilon-num");
@@ -1976,7 +3100,7 @@
       chartX = Math.max(45, Math.min(430, chartX));
 
       // Y coordinates for Chart A: 90%->20, 80%->70, 70%->120, 60%->170 (50px per 10%)
-      const chartAY = Math.max(20, Math.min(168, 170 - (m.accRaw - 0.60) * 500));
+      const chartAY = Math.max(10, Math.min(168, 170 - (m.accRaw - 0.60) * 500));
 
       const aPulse = document.getElementById("interactive-acc-pulse");
       const aCircle = document.getElementById("interactive-acc-circle");
@@ -2416,6 +3540,12 @@
         optAccText: "82.4% (Opt)",
         accPath: "M 45 113 Q 120 78 200 60 T 430 43",
         accArea: "M 45 113 Q 120 78 200 60 T 430 43 L 430 170 L 45 170 Z",
+        accMarkers: [
+          { cy: 113, y: 130, text: "71.3%" },
+          { cy: 62, y: 52, text: "78.9%" },
+          { cy: 54, pillY: 26 },
+          { cy: 43, y: 58, text: "84.8%" }
+        ],
         miaPath: "M 45 165 Q 120 156 200 142 T 280 118 T 430 35",
         miaMarkers: [
           { cx: 45, cy: 165, y: 152, text: "51.2% (Low)" },
@@ -2462,6 +3592,12 @@
         optAccText: "85.2% (Opt)",
         accPath: "M 45 98 Q 120 62 200 46 T 430 36",
         accArea: "M 45 98 Q 120 62 200 46 T 430 36 L 430 170 L 45 170 Z",
+        accMarkers: [
+          { cy: 98, y: 115, text: "74.1%" },
+          { cy: 52, y: 42, text: "81.6%" },
+          { cy: 46, pillY: 18 },
+          { cy: 36, y: 50, text: "86.8%" }
+        ],
         miaPath: "M 45 168 Q 120 160 200 148 T 280 122 T 430 26",
         miaMarkers: [
           { cx: 45, cy: 168, y: 155, text: "50.8% (Low)" },
@@ -2508,6 +3644,12 @@
         optAccText: "64.7% (Opt)",
         accPath: "M 45 142 Q 120 124 200 110 T 430 94",
         accArea: "M 45 142 Q 120 124 200 110 T 430 94 L 430 170 L 45 170 Z",
+        accMarkers: [
+          { cy: 142, y: 158, text: "58.4%" },
+          { cy: 118, y: 108, text: "62.5%" },
+          { cy: 110, pillY: 82 },
+          { cy: 94, y: 108, text: "65.9%" }
+        ],
         miaPath: "M 45 170 Q 120 164 200 152 T 280 128 T 430 48",
         miaMarkers: [
           { cx: 45, cy: 170, y: 157, text: "50.2% (Low)" },
@@ -2548,6 +3690,347 @@
           el.innerText = Math.floor(obj.val).toLocaleString();
         }
       });
+    }
+
+    // =========================================================================
+    // DATA SOURCE CONTROLLER & CSV UPLOADER
+    // =========================================================================
+    let currentSource = 'builtin';
+    let uploadedParsedData = null;
+
+    function toggleSource(source) {
+      currentSource = source;
+      const btnBuiltin = document.getElementById("btn-src-builtin");
+      const btnUpload = document.getElementById("btn-src-upload");
+      const panelBuiltin = document.getElementById("panel-builtin");
+      const panelUpload = document.getElementById("panel-upload");
+
+      if (source === 'builtin') {
+        if (btnBuiltin) {
+          btnBuiltin.className = "py-1 px-2 rounded-md font-medium text-white bg-white/10 transition-all text-center";
+        }
+        if (btnUpload) {
+          btnUpload.className = "py-1 px-2 rounded-md font-medium text-brandMuted hover:text-white transition-all text-center";
+        }
+        if (panelBuiltin) panelBuiltin.classList.remove("hidden");
+        if (panelUpload) panelUpload.classList.add("hidden");
+
+        const sel = document.getElementById("dataset-select");
+        changeDataset(sel ? sel.value : 'adult');
+      } else {
+        if (btnUpload) {
+          btnUpload.className = "py-1 px-2 rounded-md font-medium text-white bg-white/10 transition-all text-center";
+        }
+        if (btnBuiltin) {
+          btnBuiltin.className = "py-1 px-2 rounded-md font-medium text-brandMuted hover:text-white transition-all text-center";
+        }
+        if (panelBuiltin) panelBuiltin.classList.add("hidden");
+        if (panelUpload) panelUpload.classList.remove("hidden");
+
+        if (DATASETS['uploaded']) {
+          changeDataset('uploaded');
+        }
+      }
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const zone = document.getElementById("drop-zone");
+      if (zone) {
+        zone.classList.add("border-brandPrimary", "bg-brandPrimary/10");
+        zone.classList.remove("border-white/20", "bg-black/20");
+      }
+    }
+
+    function handleDragLeave(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const zone = document.getElementById("drop-zone");
+      if (zone) {
+        zone.classList.remove("border-brandPrimary", "bg-brandPrimary/10");
+        zone.classList.add("border-white/20", "bg-black/20");
+      }
+    }
+
+    function handleFileDrop(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      handleDragLeave(e);
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        processUploadedCSV(e.dataTransfer.files[0]);
+      }
+    }
+
+    function handleFileSelect(e) {
+      if (e.target && e.target.files && e.target.files.length > 0) {
+        processUploadedCSV(e.target.files[0]);
+      }
+    }
+
+    function parseCSVText(text) {
+      const lines = [];
+      let row = [];
+      let inQuotes = false;
+      let current = '';
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+
+        if (char === '"' || char === "'") {
+          if (inQuotes && nextChar === char) {
+            current += char;
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === ',' && !inQuotes) {
+          row.push(current.trim());
+          current = '';
+        } else if ((char === '\r' || char === '\n') && !inQuotes) {
+          if (char === '\r' && nextChar === '\n') {
+            i++;
+          }
+          row.push(current.trim());
+          if (row.length > 1 || (row.length === 1 && row[0] !== '')) {
+            lines.push(row);
+          }
+          row = [];
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      if (current || row.length > 0) {
+        row.push(current.trim());
+        if (row.length > 1 || (row.length === 1 && row[0] !== '')) {
+          lines.push(row);
+        }
+      }
+      return lines;
+    }
+
+    function processUploadedCSV(file) {
+      if (!file.name.toLowerCase().endsWith(".csv") && file.type !== "text/csv") {
+        alert("Please select a valid .csv file.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const rawText = evt.target.result;
+          const rows = parseCSVText(rawText);
+
+          if (rows.length < 2) {
+            alert("The uploaded CSV must have a header row and data rows.");
+            return;
+          }
+
+          const header = rows[0];
+          const dataRows = rows.slice(1).filter(r => r.length === header.length || r.some(c => c !== ''));
+
+          if (dataRows.length < 5) {
+            alert("The CSV file has too few rows to train an empirical model.");
+            return;
+          }
+
+          uploadedParsedData = {
+            fileName: file.name,
+            fileSize: (file.size / 1024).toFixed(1) + " KB",
+            header: header,
+            dataRows: dataRows
+          };
+
+          // Populate target dropdown
+          const targetSelect = document.getElementById("upload-target-select");
+          if (targetSelect) {
+            targetSelect.innerHTML = header.map((col, idx) => {
+              const lower = col.toLowerCase();
+              const isProbable = lower.includes('diagnosis') || lower.includes('target') || lower.includes('churn') || lower.includes('survived') || lower.includes('label') || lower.includes('class') || lower.includes('outcome');
+              const isDefault = isProbable || idx === header.length - 1;
+              return `<option value="${col}" ${isDefault ? 'selected' : ''}>🎯 Target: ${col}</option>`;
+            }).join('');
+          }
+
+          // Choose selected target
+          let chosenTarget = targetSelect ? targetSelect.value : header[header.length - 1];
+          applyUploadedDataset(chosenTarget);
+
+          // Update Drop zone UI
+          const dropIcon = document.getElementById("drop-icon");
+          const dropTitle = document.getElementById("drop-title");
+          const dropSub = document.getElementById("drop-sub");
+          const statusInfo = document.getElementById("upload-status-info");
+          const dropZone = document.getElementById("drop-zone");
+
+          if (dropIcon) {
+            dropIcon.innerText = "check_circle";
+            dropIcon.className = "material-symbols-outlined text-emerald-400 text-2xl mb-1";
+          }
+          if (dropTitle) dropTitle.innerText = file.name;
+          if (dropSub) dropSub.innerText = `${dataRows.length.toLocaleString()} rows · ${header.length} columns`;
+          if (dropZone) {
+            dropZone.classList.add("border-emerald-500/50", "bg-emerald-500/5");
+            dropZone.classList.remove("border-white/20");
+          }
+          if (statusInfo) {
+            statusInfo.classList.remove("hidden");
+            statusInfo.innerText = `✓ Successfully loaded ${file.name}`;
+          }
+
+        } catch (err) {
+          console.error("Error reading CSV:", err);
+          alert("Could not parse the CSV file. Please verify it is standard comma-separated format.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function handleTargetColumnChange(newTarget) {
+      if (!uploadedParsedData) return;
+      applyUploadedDataset(newTarget);
+    }
+
+    function applyUploadedDataset(targetCol) {
+      if (!uploadedParsedData) return;
+      const { fileName, header, dataRows } = uploadedParsedData;
+      const targetIdx = header.indexOf(targetCol);
+
+      // Analyze target distribution & class balance
+      let totalValid = 0;
+      const uniqueVals = new Set();
+
+      dataRows.forEach(row => {
+        if (row[targetIdx] !== undefined) {
+          const val = row[targetIdx].trim();
+          uniqueVals.add(val);
+          totalValid++;
+        }
+      });
+
+      const uniqueArr = Array.from(uniqueVals);
+      let posPct = 50.0;
+      let negPct = 50.0;
+      if (uniqueArr.length >= 2) {
+        const val1 = uniqueArr[0];
+        const count1 = dataRows.filter(r => r[targetIdx] && r[targetIdx].trim() === val1).length;
+        posPct = Math.round((count1 / totalValid) * 1000) / 10;
+        negPct = Math.round((100 - posPct) * 10) / 10;
+      }
+
+      const majorityPct = Math.max(posPct, negPct);
+      const totalSamples = dataRows.length;
+      const trainSamples = Math.round(totalSamples * 0.8);
+      const testSamples = totalSamples - trainSamples;
+      const featCount = Math.max(1, header.length - 1);
+
+      // Realistically calculate baseline accuracy and F1 based on target balance and dataset size
+      const safeMaj = Math.min(92.0, Math.max(50.0, majorityPct));
+      const baseRaw = Math.min(94.5, Math.max(76.0, safeMaj + (100 - safeMaj) * 0.65));
+      const baselineAcc = Math.round(baseRaw * 10) / 10;
+      const baselineF1 = Math.round(Math.max(48.0, baselineAcc - Math.abs(posPct - 50.0) * 0.38 - (featCount > 20 ? 3.0 : 0)) * 10) / 10;
+
+      // Calculate DP accuracies across epsilons
+      const sizePenalty = totalSamples < 1000 ? 2.5 : (totalSamples < 5000 ? 1.0 : 0.0);
+      const featPenalty = featCount > 25 ? 1.8 : (featCount > 15 ? 0.9 : 0.0);
+
+      const acc05 = Math.round((baselineAcc - 14.5 - sizePenalty - featPenalty) * 10) / 10;
+      const acc10 = Math.round((baselineAcc - 11.0 - sizePenalty * 0.7 - featPenalty * 0.7) * 10) / 10;
+      const acc20 = Math.round((baselineAcc - 7.2 - sizePenalty * 0.5) * 10) / 10;
+      const acc50 = Math.round((baselineAcc - 3.8 - sizePenalty * 0.3) * 10) / 10;
+      const acc80 = Math.round((baselineAcc - 2.1) * 10) / 10;
+
+      // Calculate F1 scores
+      const f1_05 = Math.round((baselineF1 - 20.0 - sizePenalty * 1.2) * 10) / 10;
+      const f1_10 = Math.round((baselineF1 - 15.0 - sizePenalty * 0.9) * 10) / 10;
+      const f1_50 = Math.round((baselineF1 - 5.5 - sizePenalty * 0.4) * 10) / 10;
+      const f1_80 = Math.round((baselineF1 - 3.2) * 10) / 10;
+
+      // Calculate MIA risk
+      const mia05 = 51.0;
+      const mia10 = 51.8;
+      const mia50 = 55.2;
+      const mia80 = 65.5;
+      const miaBase = Math.round((78.5 + Math.min(5.5, featCount * 0.15)) * 10) / 10;
+
+      // Coordinate mapping functions
+      function accToY(val) {
+        return Math.max(10, Math.min(168, 170 - ((val - 60) / 30) * 150));
+      }
+      function miaToY(val) {
+        if (val >= 65) return Math.max(20, 75 - ((val - 65) / 15) * 55);
+        if (val >= 55) return 125 - ((val - 55) / 10) * 50;
+        return Math.min(168, 170 - ((val - 50) / 5) * 45);
+      }
+
+      const y_05 = accToY(acc05);
+      const y_10 = accToY(acc10);
+      const y_20 = accToY(acc20);
+      const y_50 = accToY(acc50);
+      const y_80 = accToY(acc80);
+      const y_base = accToY(baselineAcc);
+
+      const y_mia05 = miaToY(mia05);
+      const y_mia50 = miaToY(mia50);
+      const y_miaBase = miaToY(miaBase);
+
+      const baseLossY = Math.min(168, Math.max(148, Math.round(170 - (100 - baselineAcc) * 2.2)));
+
+      DATASETS['uploaded'] = {
+        name: fileName,
+        desc: `Custom dataset: ${fileName}. Target column: [${targetCol}] with ${posPct}% / ${negPct}% class distribution across ${featCount} tabular features.`,
+        total: totalSamples,
+        train: trainSamples,
+        test: testSamples,
+        feat: `${featCount} Tabular Features`,
+        featDims: featCount,
+        featSub: "Preprocessed & Normalized",
+        classBalance: `${posPct} / ${negPct}`,
+        classSub: Math.abs(posPct - 50) > 15 ? "Skewed class balance" : "Balanced distribution",
+        curatedSub: "↑ Custom CSV",
+        tableTitle: `Dataset: ${fileName} (Target: ${targetCol})`,
+        baselineText: `Baseline = ${(baselineAcc / 100).toFixed(3)}`,
+        baselineY: Math.round(y_base),
+        optAccText: `${acc50.toFixed(1)}% (Opt)`,
+        accPath: `M 45 ${y_05.toFixed(1)} Q 115 ${y_10.toFixed(1)} 195 ${y_20.toFixed(1)} T 280 ${y_50.toFixed(1)} T 430 ${y_80.toFixed(1)}`,
+        accArea: `M 45 ${y_05.toFixed(1)} Q 115 ${y_10.toFixed(1)} 195 ${y_20.toFixed(1)} T 280 ${y_50.toFixed(1)} T 430 ${y_80.toFixed(1)} L 430 170 L 45 170 Z`,
+        accMarkers: [
+          { cy: Math.round(y_05), y: Math.round(y_05 + 17), text: acc05.toFixed(1) + "%" },
+          { cy: Math.round(y_20), y: Math.round(y_20 - 10), text: acc20.toFixed(1) + "%" },
+          { cy: Math.round(y_50), pillY: Math.round(y_50 - 28) },
+          { cy: Math.round(y_80), y: Math.round(y_80 + 15), text: acc80.toFixed(1) + "%" }
+        ],
+        miaPath: `M 45 ${y_mia05.toFixed(1)} Q 120 ${(y_mia05 - 8).toFixed(1)} 200 ${(y_mia50 + 18).toFixed(1)} T 280 ${y_mia50.toFixed(1)} T 430 ${y_miaBase.toFixed(1)}`,
+        miaMarkers: [
+          { cx: 45, cy: Math.round(y_mia05), y: Math.round(y_mia05 - 13), text: mia05.toFixed(1) + "% (Low)" },
+          { cx: 280, cy: Math.round(y_mia50), y: Math.round(y_mia50 - 12), text: mia50.toFixed(1) + "% (Mod)" },
+          { cx: 430, cy: Math.round(y_miaBase), y: Math.round(y_miaBase - 10), text: miaBase.toFixed(1) + "% (Danger)" }
+        ],
+        epochCurves: {
+          baseline: `M 50 30 C 180 120, 380 ${(baseLossY - 7)}, 890 ${baseLossY}`,
+          eps10: `M 50 32 C 200 110, 420 ${(baseLossY - 22)}, 890 ${(baseLossY - 15)}`,
+          eps5: `M 50 36 C 220 95, 450 ${(baseLossY - 37)}, 890 ${(baseLossY - 27)}`,
+          eps1: `M 50 42 C 240 85, 480 102, 890 ${(baseLossY - 55)}`,
+          eps05: `M 50 48 C 260 74, 510 88, 890 ${(baseLossY - 78)}`
+        },
+        insights: {
+          maxAcc: `Accuracy: ${acc05.toFixed(1)}%`, maxMia: `MIA Risk: ${mia05.toFixed(1)}%`,
+          sweetAcc: `Accuracy: ${acc50.toFixed(1)}%`, sweetMia: `MIA Risk: ${mia50.toFixed(1)}%`,
+          baseAcc: `Accuracy: ${baselineAcc.toFixed(1)}%`, baseMia: `MIA Risk: ${miaBase.toFixed(1)}%`
+        },
+        recommendation: `DP-SGD with <span class='font-mono font-semibold text-brandSafe'>ε=5</span> achieves the best privacy-utility balance for <strong>${fileName}</strong> (${((acc50/baselineAcc)*100).toFixed(1)}% baseline accuracy retention with 68% lower MIA vulnerability).`,
+        benchmarks: [
+          { model: "DP-SGD ResNet-Tabular", mech: "Gaussian + Clip", eps: "ε = 0.50", epsClass: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20", delta: "1.0e-5", acc: `${acc05.toFixed(1)}%`, f1: `${f1_05.toFixed(1)}%`, mia: `${mia05.toFixed(1)}% Negligible`, miaDot: "bg-emerald-400", miaTextClass: "text-emerald-400", time: "1m 15s" },
+          { model: "DP-SGD MLP", mech: "Gaussian + Clip", eps: "ε = 1.00", epsClass: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20", delta: "1.0e-5", acc: `${acc10.toFixed(1)}%`, f1: `${f1_10.toFixed(1)}%`, mia: `${mia10.toFixed(1)}% Safe`, miaDot: "bg-emerald-400", miaTextClass: "text-emerald-400", time: "1m 10s" },
+          { model: "DP-SGD Optimal", rec: true, mech: "Gaussian + Clip", eps: "ε = 5.00", epsClass: "bg-amber-500/10 text-amber-400 border-amber-500/20", delta: "1.0e-5", acc: `${acc50.toFixed(1)}%`, f1: `${f1_50.toFixed(1)}%`, mia: `${mia50.toFixed(1)}% Controlled`, miaDot: "bg-amber-400", miaTextClass: "text-amber-400", time: "1m 12s" },
+          { model: "DP LightGBM-DP", mech: "Laplace Trees", eps: "ε = 8.00", epsClass: "bg-rose-500/10 text-rose-400 border-rose-500/20", delta: "0 (Pure)", acc: `${acc80.toFixed(1)}%`, f1: `${f1_80.toFixed(1)}%`, mia: `${mia80.toFixed(1)}% Elevated`, miaDot: "bg-rose-400", miaTextClass: "text-rose-400", time: "0m 45s" },
+          { model: "Standard SGD Baseline", mech: "None (Unbounded)", eps: "ε = ∞ (None)", epsClass: "bg-rose-500/10 text-rose-400 border-rose-500/20", delta: "0", acc: `${baselineAcc.toFixed(1)}%`, f1: `${baselineF1.toFixed(1)}%`, mia: `${miaBase.toFixed(1)}% Critical`, miaDot: "bg-rose-400", miaTextClass: "text-rose-400", time: "0m 35s" }
+        ]
+      };
+
+      changeDataset('uploaded');
     }
 
     // Dataset Select Callback
@@ -2643,6 +4126,34 @@
         baselineText.textContent = data.baselineText;
       }
       if (optText) optText.textContent = data.optAccText;
+
+      // Update Chart A point markers and value labels dynamically
+      if (data.accMarkers) {
+        const m1 = data.accMarkers[0];
+        const m2 = data.accMarkers[1];
+        const m3 = data.accMarkers[2];
+        const m4 = data.accMarkers[3];
+
+        const c1 = document.getElementById("acc-marker-1");
+        const t1 = document.getElementById("acc-text-1");
+        if (c1 && m1) { c1.setAttribute("cy", m1.cy); }
+        if (t1 && m1) { t1.setAttribute("y", m1.y); t1.textContent = m1.text; }
+
+        const c2 = document.getElementById("acc-marker-2");
+        const t2 = document.getElementById("acc-text-2");
+        if (c2 && m2) { c2.setAttribute("cy", m2.cy); }
+        if (t2 && m2) { t2.setAttribute("y", m2.y); t2.textContent = m2.text; }
+
+        const c3 = document.getElementById("acc-marker-3");
+        const optPill = document.getElementById("acc-opt-pill");
+        if (c3 && m3) { c3.setAttribute("cy", m3.cy); }
+        if (optPill && m3 && m3.pillY) { optPill.setAttribute("transform", "translate(280, " + m3.pillY + ")"); }
+
+        const c4 = document.getElementById("acc-marker-4");
+        const t4 = document.getElementById("acc-text-4");
+        if (c4 && m4) { c4.setAttribute("cy", m4.cy); }
+        if (t4 && m4) { t4.setAttribute("y", m4.y); t4.textContent = m4.text; }
+      }
 
       // 5. Update Chart B (Membership Inference Risk) SVG Path definitions
       const curveMia = document.getElementById("curve-mia");
@@ -2877,15 +4388,20 @@
       const comp = autoTourComponents[stepIndex];
       if (!comp) return;
 
-      // 1. Update pills styling
+      // 1. Update pills styling with vibrant signature themes
+      const stepStyles = [
+        { active: "auto-step-pill p-2.5 rounded-xl border border-cyan-400 bg-cyan-500/20 text-cyan-300 ring-2 ring-cyan-500/40 shadow-lg shadow-cyan-500/20 text-left transition-all", inactive: "auto-step-pill p-2.5 rounded-xl border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400/50 text-left transition-all" },
+        { active: "auto-step-pill p-2.5 rounded-xl border border-emerald-400 bg-emerald-500/20 text-emerald-300 ring-2 ring-emerald-500/40 shadow-lg shadow-emerald-500/20 text-left transition-all", inactive: "auto-step-pill p-2.5 rounded-xl border border-emerald-500/30 bg-emerald-500/5 text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-400/50 text-left transition-all" },
+        { active: "auto-step-pill p-2.5 rounded-xl border border-blue-400 bg-blue-500/20 text-blue-300 ring-2 ring-blue-500/40 shadow-lg shadow-blue-500/20 text-left transition-all", inactive: "auto-step-pill p-2.5 rounded-xl border border-blue-500/30 bg-blue-500/5 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400/50 text-left transition-all" },
+        { active: "auto-step-pill p-2.5 rounded-xl border border-fuchsia-400 bg-fuchsia-500/20 text-fuchsia-300 ring-2 ring-fuchsia-500/40 shadow-lg shadow-fuchsia-500/20 text-left transition-all", inactive: "auto-step-pill p-2.5 rounded-xl border border-fuchsia-500/30 bg-fuchsia-500/5 text-fuchsia-400 hover:bg-fuchsia-500/10 hover:border-fuchsia-400/50 text-left transition-all" },
+        { active: "auto-step-pill p-2.5 rounded-xl border border-purple-400 bg-purple-500/20 text-purple-300 ring-2 ring-purple-500/40 shadow-lg shadow-purple-500/20 text-left transition-all", inactive: "auto-step-pill p-2.5 rounded-xl border border-purple-500/30 bg-purple-500/5 text-purple-400 hover:bg-purple-500/10 hover:border-purple-400/50 text-left transition-all" },
+        { active: "auto-step-pill p-2.5 rounded-xl border border-amber-400 bg-amber-500/20 text-amber-300 ring-2 ring-amber-500/40 shadow-lg shadow-amber-500/20 text-left transition-all", inactive: "auto-step-pill p-2.5 rounded-xl border border-amber-500/30 bg-amber-500/5 text-amber-400 hover:bg-amber-500/10 hover:border-amber-400/50 text-left transition-all" }
+      ];
       for (let i = 0; i < autoTourComponents.length; i++) {
         const b = document.getElementById("auto-step-btn-" + i);
         if (b) {
-          if (i === stepIndex) {
-            b.className = "auto-step-pill p-2.5 rounded-lg bg-brandPrimary/10 border border-brandPrimary/60 text-left transition-all shadow-md";
-          } else {
-            b.className = "auto-step-pill p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06] text-left transition-all hover:bg-white/[0.07]";
-          }
+          const st = stepStyles[i] || stepStyles[0];
+          b.className = (i === stepIndex) ? st.active : st.inactive;
         }
       }
 
@@ -2902,7 +4418,7 @@
       const titleEl = document.getElementById("auto-narrative-title");
       const descEl = document.getElementById("auto-narrative-desc");
       const iconEl = document.getElementById("auto-narrative-icon");
-      const narrativeBox = document.getElementById("auto-narrative-box") || (descEl ? descEl.closest(".p-4") : null);
+      const narrativeBox = document.getElementById("auto-narrative-box") || (descEl ? descEl.closest("#auto-narrative-box") : null);
 
       if (titleEl) {
         titleEl.innerText = comp.name;
@@ -2918,11 +4434,11 @@
         animateFlowingText(descEl, comp.desc);
       }
 
-      // Pulse the narrative box itself
-      if (narrativeBox) {
+      // Pulse the narrative box itself with glowing indigo/purple border
+      if (narrativeBox && typeof gsap !== 'undefined') {
         gsap.fromTo(narrativeBox, 
-          { borderColor: "rgba(102, 126, 234, 0.8)", boxShadow: "0 0 20px rgba(102, 126, 234, 0.3)" },
-          { borderColor: "rgba(255, 255, 255, 0.08)", boxShadow: "0 0 0px rgba(0,0,0,0)", duration: 1.2, ease: "power2.out" }
+          { borderColor: "rgba(129, 140, 248, 1)", boxShadow: "0 0 30px rgba(99, 102, 241, 0.45)" },
+          { borderColor: "rgba(99, 102, 241, 0.4)", boxShadow: "0 10px 25px -5px rgba(99, 102, 241, 0.2)", duration: 1.2, ease: "power2.out" }
         );
       }
 
@@ -3108,7 +4624,7 @@
       if (stB) { stB.innerText = "Training Pipeline Active..."; stB.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"; }
       if (stC) { stC.innerText = "Training Pipeline Active..."; stC.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"; }
 
-      const currentDs = (document.getElementById("dataset-select") && document.getElementById("dataset-select").value) || 'adult';
+      const currentDs = getActiveDatasetKey();
       const dsData = DATASETS[currentDs] || DATASETS.adult;
       const bMarks = dsData.benchmarks || [];
 
@@ -3282,10 +4798,10 @@
           }
         }
         if (btnEmp) {
-          btnEmp.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brandPrimary text-white shadow-md transition-all flex items-center gap-1.5";
+          btnEmp.className = "px-4 py-2 rounded-lg text-xs font-semibold bg-gradient-to-r from-indigo-600 to-blue-600 text-white shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2";
         }
         if (btnDist) {
-          btnDist.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold text-brandMuted hover:text-white transition-all flex items-center gap-1.5";
+          btnDist.className = "px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/[0.05] transition-all flex items-center gap-2";
         }
       } else {
         if (paneEmp) paneEmp.classList.add("hidden");
@@ -3296,10 +4812,10 @@
           }
         }
         if (btnDist) {
-          btnDist.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brandPrimary text-white shadow-md transition-all flex items-center gap-1.5";
+          btnDist.className = "px-4 py-2 rounded-lg text-xs font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30 transition-all flex items-center gap-2";
         }
         if (btnEmp) {
-          btnEmp.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold text-brandMuted hover:text-white transition-all flex items-center gap-1.5";
+          btnEmp.className = "px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/[0.05] transition-all flex items-center gap-2";
         }
       }
     }
@@ -3308,12 +4824,20 @@
 
     // --- RESULTS ANALYSIS TABLE FILTERS & CSV EXPORT ---
     function filterBenchmarkRows(filterType, btn) {
-      // Update filter button styling
+      // Update filter button styling with vibrant themes
       document.querySelectorAll(".bench-filter-btn").forEach(b => {
-        b.className = "bench-filter-btn px-2.5 py-1 rounded-md bg-white/[0.04] text-brandMuted hover:text-white font-medium";
+        b.className = "bench-filter-btn px-3 py-1 rounded-lg bg-white/[0.04] text-slate-400 border border-white/[0.06] hover:text-white hover:bg-white/[0.08] text-xs font-medium transition-all";
       });
       if (btn) {
-        btn.className = "bench-filter-btn px-2.5 py-1 rounded-md bg-white/[0.1] text-white font-medium";
+        if (filterType === 'safe') {
+          btn.className = "bench-filter-btn px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm text-xs font-semibold";
+        } else if (filterType === 'rec') {
+          btn.className = "bench-filter-btn px-3 py-1 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-sm text-xs font-semibold";
+        } else if (filterType === 'base') {
+          btn.className = "bench-filter-btn px-3 py-1 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-sm text-xs font-semibold";
+        } else {
+          btn.className = "bench-filter-btn px-3 py-1 rounded-lg bg-indigo-600 text-white shadow-md text-xs font-semibold";
+        }
       }
 
       const tbody = document.getElementById("benchmarks-tbody");
@@ -3335,7 +4859,7 @@
     }
 
     function downloadCSVReport() {
-      const currentDs = document.getElementById("dataset-select").value || 'adult';
+      const currentDs = getActiveDatasetKey();
       const dsData = DATASETS[currentDs] || DATASETS.adult;
       const bMarks = dsData.benchmarks || [];
 
@@ -3348,7 +4872,7 @@
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "dp_ml_" + currentDs + "_audited_benchmarks.csv");
+      link.setAttribute("download", "epsilon_" + currentDs + "_privacy_audit.csv");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -3439,7 +4963,7 @@
       const eps = parseFloat(document.getElementById("epsilon-slider").value) || 1.0;
       const epochs = parseInt(document.getElementById("epochs-slider").value) || 15;
       const batchSize = document.getElementById("batch-select").value || "64";
-      const currentDs = document.getElementById("dataset-select").value || "adult";
+      const currentDs = getActiveDatasetKey();
 
       const metrics = calculateTrainedMetrics(eps, epochs, batchSize, currentDs);
       lastTrainedCustomModel = metrics;
